@@ -1,0 +1,117 @@
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: white;
+}
+h1 {
+  text-align: center; 
+  margin: 0;
+  padding: 0;
+  font-variant: small-caps;
+}
+
+.card-body {
+  display: block;
+  margin-bottom: auto;
+}
+
+a {
+  color: black;
+}
+
+
+nav {
+  /* display: inline; */
+  margin-bottom: 15px;
+}
+
+nav .navbar-brand {
+  float: left;
+}
+
+nav ul {
+  float: right;
+}
+
+
+.card {
+  max-height: 600px;
+  padding: 5px
+}
+
+img {
+  width: 350px;
+  display: block;
+}
+
+.center-cropped {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#page {
+  text-align: center;
+  margin-left: 10px;
+}
+
+#loginForm {
+  text-align: left;
+  max-width: 500px;
+}
+
+
+
+@media screen and  (max-width: 768px) {
+  div .card {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+}
+
+@media screen and  (min-width: 576px) {
+  div .card {
+    width: 100%;
+  }
+}
+
+
+@media screen and  (min-width: 768px) {
+  div .card {
+    width: 50%;
+  }
+}
+
+@media screen and  (min-width: 992px) {
+  div .card {
+    width: 33.33%;
+  }
+}
+
+@media screen and  (min-width: 1200px) {
+  div .card {
+    width: 25%;
+  }
+}
+
+@media screen and  (min-width: 1700px) {
+  div .card {
+    width: 20%;
+  }
+}
+
+@media print {
+  div .card {
+    width: 25%;
+  }
+}
+
+@media handheld {
+  div .card {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+  }
+}

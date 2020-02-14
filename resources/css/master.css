@@ -1,0 +1,571 @@
+/* ************ HEX COLOR OF LOGO: #FDC100 ************* */
+@import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+.demo-iframe {
+  border: none;
+  width: 600px;
+  height: 400px;
+  clear: both;
+  display: none;
+}
+.text-input
+{
+  height: 30px;
+  width: 150px;
+}
+.text-input-billing
+{
+    height: 24px;
+}
+
+.register-block
+{
+    margin: auto;
+  text-align: center;
+}
+
+.register-table
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.register-table td,
+.register-table tr
+{
+  border-spacing: 0px;
+  border-collapse: collapse;
+  font-family: Lato;
+  font-size: 12px;
+}
+h3
+{
+  display: inline-block;
+  margin: 0px;
+}
+.prompt {
+  margin-top: 10px; font-size: 10px;
+}
+
+/* login pages forms css styling */
+
+/* login button */
+.form #loginButton {
+  padding: 8px;
+  background-color:rgb(253, 193, 0);
+  border-radius: 5px;
+  border: 5px;
+  color: black;
+  font-size: 1em;
+  opacity: 0.8;
+}
+.form #loginButton:hover{
+   opacity: 1;
+}
+
+.form #password, .form #username {
+  height: 24px;
+  margin: auto;
+  margin-top: 5px;
+  width: 150px;
+  color: white;
+  border: 1.5px solid;
+  background-color: #222;
+}
+.form #rememberme {
+  margin-top: 5px;
+  margin-bottom: 8px;
+  color: white;
+}
+
+/* background text for username and password */
+.form #password:focus, .form #username:focus {
+   background-color: lightblue;
+   color: black;
+   border: 1.5px solid grey;
+}
+
+#form
+{
+  margin: auto;
+  text-align: center;
+}
+
+/***** creaete_account.html styling  *****/
+.white-block {
+  padding: 50px;
+  color: black;
+  width: 50%;
+  margin: auto;
+  background-color: white;
+  display: block;
+  border-radius: 5px;
+  text-align: center;
+}
+#messages{
+   width:50%;
+   margin: auto;
+   color: red;
+}
+
+/***** index.html styling ******/
+.landing_page {
+  /* background-image: url("../img.jpg"); */
+  background-repeat: no-repeat;
+  /*background-image: linear-gradient(transparent, black);*/
+  background-size: 100vw;
+  background-color: #000;
+  color: white;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+.landing_img{
+  display: block;
+  padding: 1vh;
+  margin: 0px;
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  min-height: 98vh;
+}
+.logo {
+  width:600px;
+  margin: auto;
+}
+/*** Navbar css ***/
+.nav{
+  /*background-color: #111;*/
+  height: 50px;
+}
+.nav-logo {
+  height: 50px;
+  float: left;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+li {
+  float: left;
+}
+li.right{
+  float: right;
+}
+li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+a.loginLink {
+  opacity: 0.7;
+  display: block;
+  color: #FDC100;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+a.loginLink:hover{
+   opacity: 1;
+   text-decoration: underline;
+}
+/* changes color on hover */
+li a:hover{
+  background-color: #FDC100;
+  color: black;
+}
+
+#searchbarcenter{
+  overflow:hidden;
+  text-align: center;
+}
+#searchbar{
+  display:inline-block;
+  margin:10px 10px 0 0;
+  padding:5px 10px
+}
+
+/* Centering H2 tags */
+h2.centerMe {
+  text-align: center;
+  color:#FDC100;
+}
+
+/***** consumer.html styling ****/
+.results {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #FDC100;
+  border-radius: 10px;
+
+}
+
+body {
+  background-color: #000;
+  color: white;
+  font-family: Lato;
+  text-align: center;
+}
+
+/******** supplier.php css stling **********/
+/* table for printing results */
+.product_table {
+   width:90%;
+   margin: auto;
+   padding: 10px;
+   overflow-x:auto;
+}
+table{
+   width: 100%;
+   margin: auto;
+   background-color: #111;
+   border: 1px solid #FDC100;
+   padding: 0px;
+   border-radius: 2px;
+}
+
+th, td{
+   margin: auto;
+   text-align: left;
+   padding: 10px;
+   border-radius: 2px;
+   /* background-color: #222; */
+   color: white;
+}
+tr:nth-child(even){background-color: #333;}
+tr:nth-child(odd){background-color: #222;}
+
+/* adding product form */
+article#add_products{
+   width:35%;
+   margin: auto;
+}
+button#add_product_button{
+   display: block;
+   width: 120px;
+   padding: 5px;
+   margin: auto;
+   background-color: white;
+   border: 1px solid white;
+   border-radius: 2px;
+   color:black;
+   font-size: 1em;
+   transition: 0.3s;
+}
+button#add_product_button:hover{
+   background-color: #FDC100;
+   border: 1px solid #FDC100;
+}
+form#add_product{
+   width: 50%;
+   margin: auto;
+   padding: 10px;
+}
+/* input boxes for adding product */
+#add_product input[type=text], textarea, #add_product input[type=int]{
+   margin: auto;
+   padding: 5px;
+   border-radius: 5px;
+   /* display: block; */
+   background-color: #222;
+   border: 2px solid white;
+   color: white;
+   font-size: 1em;
+}
+#add_product input[type=text]:focus, textarea:focus, #add_product input[type=int]:focus{
+   background-color: lightblue;
+   border-radius: 5px;
+   color: black;
+}
+/* form lables for add product form */
+#add_product label{
+   display: block;
+   padding: 5px;
+   text-align:left;
+   font-size: 1em;
+}
+/* submit add product button */
+input[name=addProduct]{
+ display: block;
+ width: 70px;
+ margin: auto;
+ margin-top: 10px;
+ padding: 5px;
+ border: 1px solid #FDC100;
+ border-radius: 5px;
+ background-color: #FDC100;
+ color:black;
+ opacity: 0.8;
+ font-size: 1em;
+  transition: 0.2s;
+}
+input[name=addProduct]:hover{
+   opacity: 1;
+}
+#price_input input{
+  width: 60px;
+}
+
+
+
+/* billing.html */
+.form-label
+{
+  vertical-align: baseline;
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.form-small-label
+{
+  vertical-align: baseline;
+  font-size: 12px;
+  margin-left: 1px;
+}
+.required
+{
+  vertical-align: baseline;
+  color: red;
+  font-size: 10px;
+}
+
+#searchbar input{
+  border-radius: 4px;
+  padding-left: 3px;
+  padding-right: 3px;
+  line-height: 30px;
+  font-size: 20px;
+  border: 0;
+  padding: 2px;
+}
+
+.rememberme_div{
+  text-align: center;
+  margin: auto;
+  padding-top: 10px;
+   display: inline-block;
+  color: white;
+}
+
+table{
+  display: inline-block;
+}
+td{
+  text-align: left;
+}
+
+.form_reg table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.form_reg td, .form_reg th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  color: black;
+}
+.form_reg tr:nth-child(even) {
+  background-color: darkslategray;
+}
+
+#testpls {
+  background-color: purple;
+  color: white;
+}
+
+#phone_back {
+  position: absolute;
+  z-index: -1;
+}
+
+
+pre {
+  margin: 0;
+}
+
+#products_table {
+  width: 70vw;
+  margin: auto;
+  border: 0;
+  margin-bottom: 75px;
+}
+#products_table th{
+  color: #FDC100;
+}
+#search_results {
+  margin-top: 50px;}
+
+.name_td{
+  width: 8vw;
+}
+
+.desc_td{
+  width: 46vw;
+}
+
+.tr_hover{
+  transition: 0.2s;
+}
+
+
+.tr_hover:hover{
+  background-color: #5d6d7c;
+}
+
+
+.search_title{
+  font-size: 2em;
+  line-height: 3em;
+}
+
+#search_button{
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  padding: 5px;
+  border: 0;
+  padding: 2px;
+  font-size: 15px;
+  transition: 0.2s;
+}
+#search_button:hover{
+  background-color: #FDC100;
+}
+
+.value input[type=text], .value input[type=password]{
+  width: 20vw;
+  height: 20px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  border: 1px solid white;
+  padding: 3px;
+  padding-left: 5px;
+  background-color: #222;
+  color: white;
+}
+
+
+.value input[type=text]:focus, .value input[type=password]:focus{
+  border-color: #FDC100;
+}
+
+
+fieldset{
+  border: 0;
+}
+
+.field{
+  line-height: 25px;
+}
+
+
+.terms_label{
+  height: 30px;
+  display: block;
+  padding-top: 15px;
+}
+
+.value input[type=checkbox]{
+}
+
+.formData input[type=submit]{
+  margin-top: 20px;
+  background-color:rgb(253, 193, 0);
+  opacity: 0.8;
+  color: black;
+  border: 0;
+  padding: 2px;
+  font-size: 18px;
+  border-radius: 4px;
+  padding: 6px;
+  transition: 0.2s;
+}
+
+.formData input[type=submit]:hover{
+  opacity: 1;
+}
+
+.radio{
+  color: #FDC100;
+  border: 1px solid pink;
+}
+
+.formData{
+  background-color: black;
+  color: white;
+}
+
+#bg{/*
+  background-color: black;
+  background-image: */
+}
+
+#purchase_form{
+  margin: auto;
+}
+
+.hide{
+  display: none;
+}
+
+.about{
+  width: 50vw;
+  margin: auto;
+  font-family: Lato;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 20vh;
+  margin-top: 5vh;
+}
+
+.about h1{
+  font-weight: 900;
+  font-size: 2.2em;
+  letter-spacing: .015em;
+  text-decoration: none;
+  line-height: 1.25em;
+}
+.about p, .about ol{
+  margin: 0 5vw;
+  margin-bottom: 5vh;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 1.7em;
+}
+
+.about_section{
+  width: 50vw;
+  margin: 5vh 0;
+}
+
+.about_middle{
+  border-top: 1px solid rgba(231,189,116,.8);
+  border-bottom: 1px solid rgba(231,189,116,.8);
+}
+
+
+.checkout_button{
+  font-size: 1.2em;
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  padding: 3px 7px;
+  transition: 0.2s;
+  border: 0;
+}
+.checkout_button:hover{
+  background-color: #FDC100;
+}
+
+#set_name_button{
+  margin-bottom: 5vh;
+}

@@ -14,7 +14,7 @@
     <title>Index</title>
   </head>
   <body>
-    <div ng-controller="ctrl">
+    <!-- <div ng-controller="ctrl">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="navbar-brand">Event Handler</div>
         <ul class="navbar-nav mx-auto">
@@ -24,14 +24,29 @@
               <input type="submit" id="submit" value="Search" />
             </form>
           </li>
-          <!-- <li class="nav-item" ng-class="{'ng-hide'}">
-            <form class="form-inline my-2 my-lg-0" ng-submit="" >
-              <input id="page" type="number" ng-model="pgNum" name="num" min="1" max="{{}}" ng-change=""/>
-            </form>
-          </li> -->
         </ul>
       </nav>
-    </div>  
+    </div> -->
+    <div ng-controller="MainCtrl">
+      <!-- <a href="Book/Moby">Moby</a> |
+      <a href="Book/Moby/ch/1">Moby: Ch1</a> |
+      <a href="Book/Gatsby">Gatsby</a> |
+      <a href="Book/Gatsby/ch/4?key=value">Gatsby: Ch4</a> |
+      <a href="Book/Scarlet">Scarlet Letter</a><br/> -->
+      <a href="eventhandler/form">Create Event</a><br/>
+      <a href="eventhandler/attendee">See </a><br/>
+      
+    
+      <div class="view-animate-container">
+        <div ng-view class="view-animate"></div>
+      </div>
+      <hr />
+    
+      <pre>$location.path() = {{main.$location.path()}}</pre>
+      <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
+      <pre>$route.current.params = {{main.$route.current.params}}</pre>
+      <pre>$routeParams = {{main.$routeParams}}</pre>
+    </div>
 
 
     <!-- Optional JavaScript -->

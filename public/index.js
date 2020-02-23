@@ -8,7 +8,7 @@ var app = angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
   function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/Book/:bookId', {
-        templateUrl: 'book.html',
+        templateUrl: 'event_form.html',
         controller: 'BookCtrl',
         controllerAs: 'book'
       })
@@ -26,8 +26,8 @@ var app = angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
     this.$location = $location;
     this.$routeParams = $routeParams;
 }])
-.controller('BookCtrl', ['$routeParams', function BookCtrl($routeParams) {
-  this.name = 'BookCtrl';
+.controller('FormCtrl', ['$routeParams', function BookCtrl($routeParams) {
+  this.name = 'FormCtrl';
   this.params = $routeParams;
 }])
 .controller('ChapterCtrl', ['$routeParams', function ChapterCtrl($routeParams) {

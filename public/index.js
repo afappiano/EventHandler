@@ -2,7 +2,7 @@
 
 
 
-var app = angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
+var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider

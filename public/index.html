@@ -3,42 +3,41 @@
 <!doctype html>
 <html lang="en" ng-app="app">
   <head>
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <base href="/" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/css/master.css"/>
+    <link rel="stylesheet" href="resources/css/login.css"/>
+    
 
-    <title>Index</title>
+    <title>Event Handler</title>
   </head>
-  <body>
-    <!-- <div ng-controller="ctrl">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="navbar-brand">Event Handler</div>
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0" ng-submit="">
-              <input type="text" ng-model="text" placeholder="Search" name="text"/>
-              <input type="submit" id="submit" value="Search" />
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div> -->
-    <div ng-controller="MainCtrl">
-      <!-- <a href="Book/Moby">Moby</a> |
-      <a href="Book/Moby/ch/1">Moby: Ch1</a> |
-      <a href="Book/Gatsby">Gatsby</a> |
-      <a href="Book/Gatsby/ch/4?key=value">Gatsby: Ch4</a> |
-      <a href="Book/Scarlet">Scarlet Letter</a><br/> -->
-      <a href="login">Login</a><br/>
-      <a href="create">Create Event</a><br/>
-      <a href="manage">Manage Events</a><br/>
-      <a href="manage/events">Your Events</a><br/>
-      <a href="manage/attending">Attending</a><br/>
-      <a href="manage/invite">Invitations</a><br/>
+  <body ng-controller="MainCtrl">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="navbar-brand">Event Handler</div>
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a href="login">Login</a><br/>
+        </li>
+        <li class="nav-item">
+          <a href="create">Create Event</a><br/>
+        </li>
+        <li class="nav-item">
+          <a href="manage">Manage Events</a><br/>
+        </li>
+      </ul>
+    </nav>
+    <div ng-view></div>
+    <hr />
+
+    <div>
+
       <!-- <div>
         controller: {{chapter.name}}<br />
         Book Id: {{chapter.params.bookId}}<br />
@@ -46,15 +45,10 @@
       </div> -->
       
     
-      <div class="view-animate-container">
-        <div ng-view class="view-animate"></div>
-      </div>
-      <hr />
-    
-      <pre>$location.path() = {{main.$location.path()}}</pre>
+      <!-- <pre>$location.path() = {{main.$location.path()}}</pre>
       <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
       <pre>$route.current.params = {{main.$route.current.params}}</pre>
-      <pre>$routeParams = {{main.$routeParams}}</pre>
+      <pre>$routeParams = {{main.$routeParams}}</pre> -->
     </div>
 
 

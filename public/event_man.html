@@ -13,25 +13,28 @@
 
 
 
-    <title>Manage Events</title>
+    <title>Manage Event</title>
   </head>
-  <body>
-    <div ng-controller="CreateCtrl">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <li class="nav-item">
-          <a href="manage/events">Your Events</a><br/>
-        </li>
-        <li class="nav-item">
-          <a href="manage/attending">Attending</a><br/>
-        </li>
-        <li class="nav-item">
-          <a href="manage/invite">Invitations</a><br/>
-        </li>
-        
-        
-        
-      </nav>
-    </div>  
+  <body ng-controller="CreateCtrl">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="login">Login</a><br/>
+          </li>
+          <li class="nav-item">
+            <a href="create">Create Event</a><br/>
+          </li>
+          <li class="nav-item">
+            <a href="manage">Manage Events</a><br/>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
 
     <div class="left">
       <div class="map_container">

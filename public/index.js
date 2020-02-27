@@ -6,7 +6,12 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/login', {
+      .when('/', {
+        templateUrl: 'login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })  
+      .when('/login', {         // add when login true, false
         templateUrl: 'login.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
@@ -42,3 +47,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
   this.name = 'ManageCtrl';
   this.params = $routeParams;
 }]);
+
+
+
+$(document).ready(function () {
+  app.p
+
+});

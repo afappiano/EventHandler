@@ -22,9 +22,9 @@ body{
 }
 
 
-.map_container, .desc_container{
+.calendar_container{
 	width: 40vw;
-	height: 40vh;
+	height: 82vh;
 	text-align: center;
 	border: 1px solid pink;
 	margin-top: 2vh;
@@ -58,7 +58,7 @@ body{
 	float: left;
 }
 
-.guests_container{
+.events_container{
 	float: right;
 	clear: right;
 	margin-top: 2vh;
@@ -74,7 +74,7 @@ body{
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
 
-	.map_container, .desc_container, .guests_container{
+	.events_container, .calendar_container{
 		width: 80vw;
 		margin: 2vh 10vw;
 		float: none;
@@ -93,7 +93,7 @@ body{
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
 
 	.header{
 		width: 100vw;

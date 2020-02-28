@@ -1,5 +1,7 @@
 function startBuild() {
     myArea.start();
+    $('#upload_btn').hide();
+    $('#create_btn').hide();
 }
 
 function changePiece(code) {
@@ -101,11 +103,12 @@ var myArea = {
         this.canvas.height = 300;
         this.canvas.style.cursor = "none";  // hide the original cursor
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        document.getElementsByClassName("map")[0].append(this.canvas);
         this.interval = setInterval(updateArea, 20);
-        window.addEventListener('mousemove', function (e) {
-            myArea.x = Math.ceil(e.pageX/10)*10 - 10;
-            myArea.y = Math.ceil(e.pageY/10)*10 - 10;
+        document.getElementsByTagName("canvas")[0].classList.add("can");
+        document.getElementsByTagName("canvas")[0].addEventListener('mousemove', function (e) {
+            myArea.x = Math.ceil(e.pageX/10)*10 - 10 - $(".can").offset().left;
+            myArea.y = Math.ceil(e.pageY/10)*10 - 10 - $(".can").offset().top;
         })
         document.getElementsByTagName("canvas")[0].addEventListener('click', function (e) {
             var clone = Object.assign({}, pieces[piece]);

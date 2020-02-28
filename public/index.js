@@ -2,20 +2,29 @@
 
 
 
-
-var app = angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
+var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/Book/:bookId', {
-        templateUrl: 'book.html',
-        controller: 'BookCtrl',
-        controllerAs: 'book'
+      .when('/', {
+        templateUrl: 'login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })  
+      .when('/login', {         // add when login true, false
+        templateUrl: 'login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
       })
-      .when('/Book/:bookId/ch/:chapterId', {
-        templateUrl: 'chapter.html',
-        controller: 'ChapterCtrl',
-        controllerAs: 'chapter'
+      .when('/create', {
+        templateUrl: 'event_form.html',
+        controller: 'CreateCtrl',
+        controllerAs: 'create'
+      })
+      .when('/manage', {
+        templateUrl: 'event_man.html',
+        controller: 'ManageCtrl',
+        controllerAs: 'manage'
       });
 
     $locationProvider.html5Mode(true);
@@ -26,11 +35,22 @@ var app = angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
     this.$location = $location;
     this.$routeParams = $routeParams;
 }])
-.controller('BookCtrl', ['$routeParams', function BookCtrl($routeParams) {
-  this.name = 'BookCtrl';
+.controller('LoginCtrl', ['$routeParams', function LoginCtrl($routeParams) {
+  this.name = 'LoginCtrl';
   this.params = $routeParams;
 }])
-.controller('ChapterCtrl', ['$routeParams', function ChapterCtrl($routeParams) {
-  this.name = 'ChapterCtrl';
+.controller('CreateCtrl', ['$routeParams', function CreateCtrl($routeParams) {
+  this.name = 'CreateCtrl';
+  this.params = $routeParams;
+}])
+.controller('ManageCtrl', ['$routeParams', function  ManageCtrl($routeParams) {
+  this.name = 'ManageCtrl';
   this.params = $routeParams;
 }]);
+
+
+
+$(document).ready(function () {
+  app.p
+
+});

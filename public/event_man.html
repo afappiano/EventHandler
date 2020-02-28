@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="resources/css/login.css"/>
+    <link rel="stylesheet" href="resources/css/event.css"/>
+
+
+
+    <title>Manage Event</title>
+  </head>
+  <body ng-controller="CreateCtrl">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="login">Login</a><br/>
+          </li>
+          <li class="nav-item">
+            <a href="create">Create Event</a><br/>
+          </li>
+          <li class="nav-item">
+            <a href="manage">Manage Events</a><br/>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="left">
+      <div class="map_container">
+        <h2>Event Map/Floorplan</h2>
+        <div class="map">
+          <div class="btn" id="upload_btn">Upload</div>
+          <div class="btn" id="create_btn">Create</div>
+        </div>
+      </div>
+
+      <div class="desc_container">
+        <h2>Details</h2>
+        <textarea class="desc"></textarea>
+      </div>
+    </div>
+
+    <div class="guests_container">
+      <h2>Attendees</h2>
+      <ol class="guests">
+
+      </ol>
+      <div class="btn" id="invite_btn">Invite</div>
+    </div>
+  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-resource.js"></script>
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>

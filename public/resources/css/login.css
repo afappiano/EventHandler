@@ -22,7 +22,7 @@ a {
 
 nav {
   /* display: inline; */
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 nav .navbar-brand {
@@ -33,6 +33,27 @@ nav ul {
   float: right;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+li {
+  float: left;
+}
+li a{
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  /* transition: 0.2s; */
+}
+
+.container {
+  width: 60vw;
+	/* height: 40vh; */
+	margin-top: 2vh;
+}
 
 .card {
   max-height: 600px;

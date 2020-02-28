@@ -1,3 +1,4 @@
+/*<<<<<<< Updated upstream:public/resources/css/event.css
 body{
 	text-align: center;
 }
@@ -45,13 +46,13 @@ body{
 	padding: 1vh 1vw;
 }
 
-/*{
+{
 	width: 40vw;
 	height: 40vh;
 	text-align: center;
 	border: 1px solid pink;
 	display: block;
-}*/
+}
 
 
 .left{
@@ -66,6 +67,125 @@ body{
 	margin-right: 5vw;
 	text-align: center;
 	border: 1px solid lime;
+	display: block;
+	/*position: relative;*/
+}
+
+/*
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+
+	.map_container, .desc_container, .guests_container{
+		width: 80vw;
+		margin: 2vh 10vw;
+		float: none;
+		clear: none;
+		display: block;
+	}
+
+	.left{
+		float: none;
+	}
+
+	.desc{
+		width: 80vw;
+	}
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+	.header{
+		width: 100vw;
+	}
+
+	input{
+		width: 25vw;
+		max-width: 25vw;
+	}
+
+}
+=======*/
+/*@import url('https://fonts.googleapis.com/css?family=Palanquin:100|Roboto&display=swap');
+*/
+
+@font-face {
+  font-family: 'Palanquin';
+  src:  url('../fonts/Palanquin/Palanquin-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  src:  url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+
+body{
+	text-align: center;
+	font-family: 'Palanquin';
+}
+
+
+.navbar, h2{
+	font-family: 'Roboto';
+}
+
+.btn{
+	border: 2px solid royalblue;
+	background-color: royalblue;
+	color: white;
+	transition: 0.5s;
+	display: block;
+	width: auto;
+	max-width: 10vw;
+	text-align: center;
+	margin: 1vh auto;
+}
+
+.btn:hover{
+	border: 2px solid royalblue;
+	background-color: transparent;
+	color: royalblue;
+}
+
+
+.map_container, .desc_container{
+	width: 40vw;
+	height: 40vh;
+	text-align: center;
+	border: 1px solid pink;
+	margin-top: 2vh;
+	display: block;
+	margin-left: 5vw;
+}
+
+.map{
+	border: 1px solid blue;
+	height: 30vh;
+	background-color: #a7b9f1;
+	border-radius: 5px;
+}
+
+
+.desc{
+	width: 40vw;
+	height: 30vh;
+	padding: 1vh 1vw;
+	border-radius: 5px;
+}
+
+
+.left{
+	float: left;
+}
+
+.guests_container{
+	float: right;
+	clear: right;
+	width: 40vw;
+	height: 82vh;
+	margin-right: 5vw;
+	text-align: center;
+	border: 1px solid yellow;
 	display: block;
 	/*position: relative;*/
 }
@@ -104,3 +224,4 @@ body{
 	}
 
 }
+/*>>>>>>> Stashed changes:resources/css/event.css*/

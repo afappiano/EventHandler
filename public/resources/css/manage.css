@@ -3,7 +3,7 @@ body{
 }
 
 
-.btn{
+/*.btn{
 	border: 2px solid royalblue;
 	background-color: royalblue;
 	color: white;
@@ -20,7 +20,7 @@ body{
 	background-color: transparent;
 	color: royalblue;
 }
-
+*/
 
 .calendar_container{
 	width: 40vw;
@@ -32,19 +32,19 @@ body{
 	margin-left: 5vw;
 }
 
-.map{
+/*.map{
 	border: 1px solid blue;
 	height: 30vh;
 	background-color: #a7b9f1;
 }
+*/
 
-
-.desc{
+/*.desc{
 	width: 40vw;
 	height: 30vh;
 	padding: 1vh 1vw;
 }
-
+*/
 /*{
 	width: 40vw;
 	height: 40vh;

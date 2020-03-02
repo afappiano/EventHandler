@@ -114,10 +114,12 @@ body{
   font-family: 'Palanquin';
   src:  url('../fonts/Palanquin/Palanquin-Regular.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Roboto';
   src:  url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
 }
+
 
 
 body{
@@ -148,6 +150,9 @@ body{
 	color: royalblue;
 }
 
+a:hover{
+	text-decoration: none;
+}
 
 .map_container, .desc_container{
 	width: 40vw;
@@ -188,6 +193,7 @@ body{
 	text-align: center;
 	border: 1px solid yellow;
 	display: block;
+	margin-top: 2vh;
 	/*position: relative;*/
 }
 

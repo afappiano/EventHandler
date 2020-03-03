@@ -128,7 +128,7 @@ body{
 }
 
 
-.navbar, h2{
+.navbar, h2, h3{
 	font-family: 'Roboto';
 }
 
@@ -232,3 +232,9 @@ a:hover{
 
 }
 /*>>>>>>> Stashed changes:resources/css/event.css*/
+
+
+
+.btn-lg{
+	max-width: 16vw;
+}

@@ -10,55 +10,35 @@
     
     <link rel="stylesheet" href="resources/css/login.css"/>
     <link rel="stylesheet" href="resources/css/event.css"/>
+    <link rel="stylesheet" href="resources/css/manage.css"/>
 
 
 
     <title>Manage Event</title>
   </head>
   <body ng-controller="CreateCtrl">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="login">Login</a><br/>
-          </li>
-          <li class="nav-item">
-            <a href="create">Create Event</a><br/>
-          </li>
-          <li class="nav-item">
-            <a href="manage">Manage Events</a><br/>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
 
     <div class="left">
-      <div class="map_container">
-        <h2>Event Map/Floorplan</h2>
-        <div class="map">
-          <div class="btn" id="upload_btn">Upload</div>
-          <div class="btn" id="create_btn">Create</div>
-        </div>
-      </div>
-
-      <div class="desc_container">
-        <h2>Details</h2>
-        <textarea class="desc"></textarea>
+      <div class="calendar_container">
+        <h2>Event Calendar</h2>
+        <!-- <div class="map"> -->
+          <a href="#"><div class="btn">Your Events</div></a>
+          <a href="attending"><div class="btn">Attending</div></a>
+          <a href="register"><div class="btn">Invitations</div></a>
+        <!-- </div> -->
       </div>
     </div>
 
-    <div class="guests_container">
-      <h2>Attendees</h2>
-      <ol class="guests">
-
-      </ol>
-      <div class="btn" id="invite_btn">Invite</div>
+    <div class="events_container">
+      <h2>{{tab name}}</h2>
+      <div class="events">
+        <a href="#"><div class="btn">Event 1</div></a>
+        <a href="#"><div class="btn">Event 2</div></a>
+        <a href="#"><div class="btn">etc</div></a>
+      </div>
+      <!-- <div class="btn"><a href="#">etc</a><br/></div> -->
     </div>
-  
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

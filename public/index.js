@@ -21,6 +21,16 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
         controller: 'CreateCtrl',
         controllerAs: 'create'
       })
+      .when('/attending', {
+        templateUrl: 'attendee_view.html',
+        controller: 'AttendCtrl',
+        controllerAs: 'attending'
+      })
+      .when('/register', {
+        templateUrl: 'attendee_reg.html',
+        controller: 'RegCtrl',
+        controllerAs: 'register'
+      })
       .when('/manage', {
         templateUrl: 'event_man.html',
         controller: 'ManageCtrl',
@@ -41,6 +51,14 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 }])
 .controller('CreateCtrl', ['$routeParams', function CreateCtrl($routeParams) {
   this.name = 'CreateCtrl';
+  this.params = $routeParams;
+}])
+.controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
+  this.name = 'AttendCtrl';
+  this.params = $routeParams;
+}])
+.controller('RegCtrl', ['$routeParams', function RegCtrl($routeParams) {
+  this.name = 'RegCtrl';
   this.params = $routeParams;
 }])
 .controller('ManageCtrl', ['$routeParams', function  ManageCtrl($routeParams) {

@@ -19,24 +19,54 @@
   <body ng-controller="CreateCtrl">
 
     <div class="left">
-      <div class="calendar_container">
+      <div class="calendar_container nav nav-pills mb-3" role="tablist">
         <h2>Event Calendar</h2>
-        <!-- <div class="map"> -->
-          <a href="#"><div class="btn">Your Events</div></a>
-          <a href="attending"><div class="btn">Attending</div></a>
-          <a href="register"><div class="btn">Invitations</div></a>
+        <!-- <div class="nav nav-pills mb-3" role="tablist"> -->
+          <!-- <div class="btn nav-item">
+            <a class="nav-link" id="your-events-tab" data-toggle="pill" href="#your-events" role="tab" aria-controls="your-events" aria-selected="false"> Your Events</a>
+          </div>
+          <div class="btn nav-item">
+            <a class="nav-link" id="attending-events-tab" data-toggle="pill" href="#attending-events" role="tab" aria-controls="attending-events" aria-selected="false">Attending</a>
+          </div>
+          <div class="btn nav-item">
+            <a class="nav-link" id="invited-events-tab" data-toggle="pill" href="#invited-events" role="tab" aria-controls="invited-events" aria-selected="false">Invitations</a>
+          </div> -->
+
+          <a id="your-events-tab" role="tab" href="#your-events" aria-controls="your-events" aria-selected="false" class="nav-item nav-link" data-toggle="pill"><div class="btn">Your Events</div></a>
+          <a id="attending-events-tab" role="tab" href="#attending-events" aria-controls="attending-events" aria-selected="false" class="nav-item nav-link" data-toggle="pill"><div class="btn">Attending</div></a>
+          <a id="invited-events-tab" role="tab" href="#invited-events" aria-controls="invited-events" aria-selected="false" class="nav-item nav-link" data-toggle="pill"><div class="btn">Invitations</div></a>
+
+          
+          <!-- <a href="#"><div class="btn nav-item">Your Events</div></a>
+          <a href="attending"><div class="btn nav-item">Attending</div></a>
+          <a href="register"><div class="btn nav-item">Invitations</div></a> -->
         <!-- </div> -->
       </div>
     </div>
 
     <div class="events_container">
-      <h2>{{tab name}}</h2>
-      <div class="events">
-        <a href="#"><div class="btn">Event 1</div></a>
-        <a href="#"><div class="btn">Event 2</div></a>
-        <a href="#"><div class="btn">etc</div></a>
+      <!-- <h2>Your Events</h2> -->
+      <div class="events tab-content">
+        <div class="tab-pane fade" id="your-events" role="tabpanel" aria-labelledby="your-events-tab">
+          <h2>Your Events</h2>
+          <a href="#"><div class="btn">Event 1</div></a>
+          <a href="#"><div class="btn">Event 2</div></a>
+          <a href="#"><div class="btn">etc</div></a>
+        </div>
+        <div class="tab-pane fade" id="attending-events" role="tabpanel" aria-labelledby="attending-events-tab">
+          <h2>Attending</h2>
+          <a href="attending"><div class="btn">Event 1</div></a>
+          <a href="attending"><div class="btn">Event 2</div></a>
+          <a href="attending"><div class="btn">etc</div></a>
+        </div>
+        <div class="tab-pane fade" id="invited-events" role="tabpanel" aria-labelledby="invited-events-tab">
+          <h2>Invites</h2>
+          <a href="register"><div class="btn">Event 1</div></a>
+          <a href="register"><div class="btn">Event 2</div></a>
+          <a href="register"><div class="btn">etc</div></a>
+        </div>
+
       </div>
-      <!-- <div class="btn"><a href="#">etc</a><br/></div> -->
     </div>
 
 

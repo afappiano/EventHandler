@@ -64,6 +64,12 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 .controller('ManageCtrl', ['$routeParams', function  ManageCtrl($routeParams) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
+  this.$scope.isAccepted = function(/**/){
+    // if (/*pending*/) return 0;
+    // if (/*declined*/) return 1;
+    // if (/*accepted*/)
+    return 2;
+  }
 }]);
 
 

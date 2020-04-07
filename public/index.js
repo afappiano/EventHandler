@@ -2,7 +2,7 @@
 
 
 
-var app = angular.module('app', ['ngRoute', 'ngAnimate'])
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
@@ -61,14 +61,16 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
   this.name = 'RegCtrl';
   this.params = $routeParams;
 }])
-.controller('ManageCtrl', ['$routeParams', function  ManageCtrl($routeParams) {
+.controller('ManageCtrl', ['$routeParams', '$scope', function  ManageCtrl($scope, $routeParams) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
-  this.$scope.isAccepted = function(/**/){
+  this.scope = $scope;
+  this.scope.isAccepted = function(num){
     // if (/*pending*/) return 0;
     // if (/*declined*/) return 1;
     // if (/*accepted*/)
-    return 2;
+    console.log(num);
+    return num;
   }
 }]);
 

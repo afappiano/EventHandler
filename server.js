@@ -49,6 +49,38 @@ app.post('/api/user/register', (req, res) => {
 	}
 });
 
+
+app.post('/api/events/new', (req, res) => {
+  let name = req.body['name'];
+  let description = req.body['description'];
+  let time = req.body['time'];
+  let location = req.body['location'];
+
+	if(name === undefined){
+		res.status(400).send({
+			error: "Missing name"
+		});
+	}
+	else if(description === undefined){
+		res.status(400).send({
+			error: "Missing description"
+		});
+  }
+	else if(time === undefined){
+		res.status(400).send({
+			error: "Missing time"
+		});
+  }
+  else if(location === undefined){
+		res.status(400).send({
+			error: "Missing location"
+		});
+	}
+
+
+});
+
+
 // MongoDB
 const mongodb = require('mongodb');
 let db;

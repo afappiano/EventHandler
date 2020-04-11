@@ -6,6 +6,3 @@ const port = 3000;
 // Serve static files from public directory
 app.use(express.static('public'));
 
-
-
-

@@ -12,64 +12,50 @@
     <title>Login or Signup</title>
   </head>
   <body>
-    <div ng-controller="ctrl">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="navbar-brand">Event Handler</div>
-        <!-- <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0" ng-submit="">
-              <input type="text" ng-model="text" placeholder="Search" name="text"/>
-              <input type="submit" id="submit" value="Search" />
-            </form>
-          </li>
-          <li class="nav-item" ng-class="{'ng-hide'}">
-            <form class="form-inline my-2 my-lg-0" ng-submit="" >
-              <input id="page" type="number" ng-model="pgNum" name="num" min="1" max="{{}}" ng-change=""/>
-            </form>
-          </li>
-        </ul> -->
-      </nav>
+  <div ng-controller="LoginCtrl">
 
 
-      <div class="container">
-        <form id="loginForm" class="mx-auto" ng-submit="login()">
-          <h5>Login or Sign Up</h5>
-          <div class="form-group">
-            <!-- <label for="emailInput">Email address</label> -->
-            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <!-- <label for="passwordInput">Password</label> -->
-            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
-          </div>
-          <!-- <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-          </div> -->
-          <input type="submit" ng-click="login()" class="btn btn-primary btn-block" value="Login">
-          <input type="submit" ng-click="signup()" class="btn btn-secondary btn-block" value="Sign Up">
 
-          
-          
+    <div class="container">
+      <form id="loginForm" class="mx-auto" ng-submit="login()">
+        <h5>Login or Sign Up</h5>
+        <div class="form-group">
+          <!-- <label for="emailInput">Email address</label> -->
+          <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <!-- <label for="passwordInput">Password</label> -->
+          <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+        </div>
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div> -->
+        <input type="submit" ng-click="login()" class="btn btn-primary btn-block" value="Login">
+        <input type="submit" ng-click="signup()" class="btn btn-secondary btn-block" value="Sign Up">
 
-        </form>
-  
-      </div>
+        
+        
 
-    </div>  
+      </form>
+
+    </div>
 
 
+
+  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
+    <!-- <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-resource.js"></script>
 
-    <script type="text/javascript" src="login.js"></script>
+    <script type="text/javascript" src="index.js"></script> -->
 
 
-  </body>
+  
+</body>
 </html>

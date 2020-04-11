@@ -11,45 +11,19 @@
     <link rel="stylesheet" href="resources/css/login.css"/>
     <link rel="stylesheet" href="resources/css/event.css"/>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-resource.js"></script>
 
-    <script type="text/javascript" src="lab3.js"></script>
 
-    <title>Index</title>
+    <title>Create Event</title>
   </head>
   <body>
-    <div ng-controller="ctrl">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="navbar-brand">Event Handler</div>
-        <!-- <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0" ng-submit="">
-              <input type="text" ng-model="text" placeholder="Search" name="text"/>
-              <input type="submit" id="submit" value="Search" />
-            </form>
-          </li>
-           <li class="nav-item" ng-class="{'ng-hide'}">
-            <form class="form-inline my-2 my-lg-0" ng-submit="" >
-              <input id="page" type="number" ng-model="pgNum" name="num" min="1" max="{{}}" ng-change=""/>
-            </form>
-          </li>
-        </ul> -->
-      </nav>
-    </div>  
+  <div ng-controller="CreateCtrl">
 
     <div class="left">
       <div class="map_container">
         <h2>Event Map/Floorplan</h2>
         <div class="map">
           <div class="btn" id="upload_btn">Upload</div>
-          <div class="btn" id="create_btn">Create</div>
+          <div class="btn" id="create_btn" onclick="startBuild()">Create</div>
         </div>
       </div>
 
@@ -66,8 +40,20 @@
       </ol>
       <div class="btn" id="invite_btn">Invite</div>
     </div>
+
+
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-resource.js"></script>
+
+    <script type="text/javascript" src="index.js"></script> -->
+    <script src="canvas.js"></script>
   
-
-
-  </body>
+</body>
 </html>

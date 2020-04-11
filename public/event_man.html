@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="resources/css/login.css"/>
+    <link rel="stylesheet" href="resources/css/event.css"/>
+    <link rel="stylesheet" href="resources/css/manage.css"/>
+
+
+
+    <title>Manage Event</title>
+  </head>
+  <body >
+    <div ng-controller="ManageCtrl">
+
+      <div class="left">
+        <div class="calendar_container nav nav-pills mb-3" role="tablist">
+          <h2>Event Calendar</h2>
+          <!-- <div class="nav nav-pills mb-3" role="tablist"> -->
+            <!-- <div class="btn nav-item">
+              <a class="nav-link" id="your-events-tab" data-toggle="pill" href="#your-events" role="tab" aria-controls="your-events" aria-selected="false"> Your Events</a>
+            </div>
+            <div class="btn nav-item">
+              <a class="nav-link" id="attending-events-tab" data-toggle="pill" href="#attending-events" role="tab" aria-controls="attending-events" aria-selected="false">Attending</a>
+            </div>
+            <div class="btn nav-item">
+              <a class="nav-link" id="invited-events-tab" data-toggle="pill" href="#invited-events" role="tab" aria-controls="invited-events" aria-selected="false">Invitations</a>
+            </div> -->
+
+            <div class="nav-item">
+              <a id="your-events-tab" role="tab" href="#your-events" aria-controls="your-events" aria-selected="false" class="nav-link btn" data-toggle="pill">Your Events</a>
+            </div>
+            <!-- <div class="nav-item">
+              <a id="attending-events-tab" role="tab" href="#attending-events" aria-controls="attending-events" aria-selected="false" class="nav-link btn" data-toggle="pill">Attending</a>
+            </div> -->
+            <div class="nav-item">
+              <a id="invited-events-tab" role="tab" href="#invited-events" aria-controls="invited-events" aria-selected="false" class="nav-link btn" data-toggle="pill">Invitations</a>
+            </div>
+
+
+            
+            <!-- <a href="#"><div class="btn nav-item">Your Events</div></a>
+            <a href="attending"><div class="btn nav-item">Attending</div></a>
+            <a href="register"><div class="btn nav-item">Invitations</div></a> -->
+          <!-- </div> -->
+        </div>
+      </div>
+
+      <div class="events_container">
+        <!-- <h2>Your Events</h2> -->
+        <div class="events tab-content">
+          <div class="tab-pane fade" id="your-events" role="tabpanel" aria-labelledby="your-events-tab">
+            <h2>Your Events</h2>
+            <a href="#"><div class="btn">Event 1</div></a>
+            <a href="#"><div class="btn">Event 2</div></a>
+            <a href="#"><div class="btn">etc</div></a>
+          </div>
+          <!-- <div class="tab-pane fade" id="attending-events" role="tabpanel" aria-labelledby="attending-events-tab">
+            <h2>Attending</h2>
+            <a href="attending"><div class="btn">Event 1</div></a>
+            <a href="attending"><div class="btn">Event 2</div></a>
+            <a href="attending"><div class="btn">etc</div></a>
+          </div> -->
+          <div class="tab-pane fade" id="invited-events" role="tabpanel" aria-labelledby="invited-events-tab">
+            <h2>Invitations</h2>
+            <!-- <div class="pending" ng-switch on="isAccepted(0)">
+              <div class="btn">Event 1</div>
+              <a href="register" ng-switch-when="0">
+                <div class="btn">Pending</div>
+              </a>
+              <a href="register" ng-switch-when="1" >
+                <div class="btn">Declined</div>
+              </a>
+              <a href="attending" ng-switch-when="2">
+                <div class="btn">Accepted</div>
+              </a>
+              <a href="register" ng-switch-default>
+                <div class="btn">default</div>
+              </a>
+            </div> -->
+            
+            <!-- <a href="register"><div class="btn">Event 2</div></a>
+            <a href="register"><div class="btn">etc</div></a> -->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-resource.js"></script>
+
+    <script type="text/javascript" src="index.js"></script> -->
+  </body>
+</html>

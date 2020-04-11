@@ -1,0 +1,107 @@
+body{
+	text-align: center;
+}
+
+
+/*.btn{
+	border: 2px solid royalblue;
+	background-color: royalblue;
+	color: white;
+	transition: 0.5s;
+	display: block;
+	width: auto;
+	max-width: 10vw;
+	text-align: center;
+	margin: 1vh auto;
+}
+
+.btn:hover{
+	border: 2px solid royalblue;
+	background-color: transparent;
+	color: royalblue;
+}
+*/
+
+.calendar_container{
+	width: 40vw;
+	height: 82vh;
+	text-align: center;
+	/* border: 1px solid pink; */
+	margin-top: 2vh;
+	display: block;
+	margin-left: 5vw;
+}
+
+/*.map{
+	border: 1px solid blue;
+	height: 30vh;
+	background-color: #a7b9f1;
+}
+*/
+
+/*.desc{
+	width: 40vw;
+	height: 30vh;
+	padding: 1vh 1vw;
+}
+*/
+/*{
+	width: 40vw;
+	height: 40vh;
+	text-align: center;
+	border: 1px solid pink;
+	display: block;
+}*/
+
+
+.left{
+	float: left;
+}
+
+.events_container{
+	float: right;
+	clear: right;
+	margin-top: 2vh;
+	width: 40vw;
+	height: 82vh;
+	margin-right: 5vw;
+	text-align: center;
+	/* border: 1px solid lime; */
+	display: block;
+	/*position: relative;*/
+}
+
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+
+	.events_container, .calendar_container{
+		width: 80vw;
+		margin: 2vh 10vw;
+		float: none;
+		clear: none;
+		display: block;
+	}
+
+	.left{
+		float: none;
+	}
+
+	.desc{
+		width: 80vw;
+	}
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+	.header{
+		width: 100vw;
+	}
+
+	input{
+		width: 25vw;
+		max-width: 25vw;
+	}
+
+}

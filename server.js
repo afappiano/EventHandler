@@ -75,6 +75,55 @@ app.post('/api/user/register', (req, res) => {
 		}
 	}
 });
+app.post('/api/user/login', ((req, res) => {
+
+	let email = req.body['email'];
+	let password = req.body['password'];
+
+	// Check if email is present
+	if(email === undefined){
+		res.status(400).send({
+			error: "Missing email"
+		});
+	}
+	// Check if password is present
+	else if(password === undefined){
+		res.status(400).send({
+			error: "Missing password"
+		});
+	}else{
+		// Get hash from database
+		db.collection('users').findOne({email:email}, (err, database_result) => {
+			if(err){
+				res.status(500).send({
+					error: "Error talking to database"
+				});
+			}else{
+				if(database_result === null){
+					res.status(401).send({
+						error: "Invalid credentials"
+					});
+				}else{
+					bcrypt.compare(password, database_result['password'], (err, compare_result) => {
+						if(err){
+							res.status(500).send({
+								error: "Error comparing password hash"
+							});
+						}else if(compare_result){
+							// Login successful
+							res.sendStatus(200);
+						}else{
+							res.status(401).send({
+								error: "Invalid credentials"
+							});
+						}
+					});
+				}
+			}
+		});
+	}
+
+}));
 
 // MongoDB
 const mongodb = require('mongodb');

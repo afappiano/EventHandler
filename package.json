@@ -4,7 +4,8 @@
   "description": "Web Science Project",
   "dependencies": {
     "bson": "^0.4.21",
-    "express": "^4.10.2",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.5",
     "path": "^0.12.7"
   },
   "license": "UNLICENSED",

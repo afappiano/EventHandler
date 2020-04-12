@@ -49,9 +49,76 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   this.name = 'LoginCtrl';
   this.params = $routeParams;
 }])
-.controller('CreateCtrl', ['$routeParams', function CreateCtrl($routeParams) {
+.controller('CreateCtrl', ['$routeParams', "$http", '$scope', function CreateCtrl($scope, $http, $routeParams) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
+  this.scope = $scope;
+
+  this.scope.event = {
+    // map: ,
+    name: "",
+    desc: "",
+    time: "",
+    loc: "",
+    attendees: []
+    
+  }
+
+  //populate page with event to be edited
+  this.scope.editEvent = function (ev) {
+    this.scope.event = {
+      // map: ,
+      name: ev.name,
+      desc: ev.desc,
+      time: ev.time,
+      loc: ev.loc,
+      attendees: ev.attendees
+    }
+  },
+
+  //save edited event
+  this.scope.saveEvent = function () {
+    //
+    var parameters = $.param(this.scope.event);
+
+    $http({
+      method: "POST",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: 'http://localhost:3000/api/events/edit?'+parameters,
+      data: parameters
+    }).then(function(res) {
+      console.log("Event saved");
+    },
+    function(res) {
+      console.log('error', res);
+    });
+  }
+
+  //save new event
+  this.scope.createEvent = function () {
+
+    var parameters = $.param(this.scope.event);
+
+    $http({
+      method: "POST",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: 'http://localhost:3000/api/events/new?'+parameters,
+      data: parameters
+    }).then(function(res) {
+      console.log("Event created");
+    },
+    function(res) {
+      console.log('error', res);
+    });
+
+
+  }
+  
+
 }])
 .controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
   this.name = 'AttendCtrl';

@@ -17,13 +17,16 @@
   </head>
   <body>
   <div ng-controller="CreateCtrl">
-    <form ng-submit="">
+
+    <form ng-submit="createEvent()">
+
       <div class="left">
         <div class="map_container">
           <h2>Event Map/Floorplan</h2>
           <div class="map form-group">
             <div class="btn" id="upload_btn">Upload</div>
             <div class="btn" id="create_btn" onclick="startBuild()">Create</div>
+            <!--ng-model="event.map"-->
           </div>
         </div>
 
@@ -31,19 +34,19 @@
           <!-- <h2>Details</h2> -->
           <div class="form-group">
             <label for="eventName">Event Name</label>
-            <input type="text" class="form-control" id="eventName" value="{{}}">
+            <input type="text" class="form-control" id="eventName" ng-model="event.name">
           </div>
           <div class="form-group">
             <label for="eventDesc">Description</label>
-            <textarea type="text" class="form-control" id="eventDesc">{{}}</textarea>
+            <textarea type="text" class="form-control" id="eventDesc" ng-model="event.desc"></textarea>
           </div>
           <div class="form-group">
             <label for="eventTime">Time</label>
-            <input type="datetime-local" class="form-control" id="eventTime" value="{{}}">
+            <input type="datetime-local" class="form-control" id="eventTime" ng-model="event.time">
           </div>
           <div class="form-group">
             <label for="eventLoc">Location</label>
-            <textarea type="text" class="form-control" id="eventLoc">{{}}</textarea>
+            <textarea type="text" class="form-control" ng-model="event.loc"></textarea>
           </div>
 
           
@@ -53,8 +56,21 @@
       <div class="guests_container">
         <h2>Attendees</h2>
         <ol class="guests">
+          <div class="guest" ng-repeat="attendee in event.attendees">
+            <div class="">
+
+            </div>
+            <div class="attendeeStatus">
+
+            </div>
+          </div>
         </ol>
-        <div class="btn" id="invite_btn">Invite</div>
+        <div class="form-group">
+          <label for="attendeeEmail">Email</label>
+          <input type="email" class="form-control" id="attendeeEmail" aria-describedby="emailHelp" placeholder="Email">
+          <div class="btn" id="invite_btn">Invite</div>
+        </div>
+        
       </div>
       <div class="submit_container">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Event</button>

@@ -18,13 +18,13 @@ app.post('/api/user/register', (req, res) => {
 	let password = req.body['password'];
 
 	// Check if email is present
-	if(email === undefined){
+	if(email == ""){
 		res.status(400).send({
 			error: "Missing email"
 		});
 	}
 	// Check if password is present
-	else if(password === undefined){
+	else if(password == ""){
 		res.status(400).send({
 			error: "Missing password"
 		});
@@ -49,34 +49,46 @@ app.post('/api/user/register', (req, res) => {
 	}
 });
 
-
+// create new event
 app.post('/api/events/new', (req, res) => {
-  let name = req.body['name'];
-  let description = req.body['description'];
-  let time = req.body['time'];
-  let location = req.body['location'];
+  console.log(req);
 
-	if(name === undefined){
+  var event = req.body;
+
+	if(event.name == ""){
 		res.status(400).send({
 			error: "Missing name"
 		});
 	}
-	else if(description === undefined){
+	else if(event.desc == ""){
 		res.status(400).send({
 			error: "Missing description"
 		});
   }
-	else if(time === undefined){
+	else if(event.time == ""){
 		res.status(400).send({
 			error: "Missing time"
 		});
   }
-  else if(location === undefined){
+  else if(event.loc == ""){
 		res.status(400).send({
 			error: "Missing location"
 		});
-	}
+  }
+  else {
+    dbo.collection("events").insertOne(event, function(err, res) {
+      if (err) throw err;
+      // console.log("Data inserted...");
+      db.close();
+    });
 
+  }
+
+  
+});
+
+// edit event
+app.post('/api/events/edit', (req, res) => {
 
 });
 

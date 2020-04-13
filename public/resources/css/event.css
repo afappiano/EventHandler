@@ -212,6 +212,10 @@ a:hover{
 	margin-top: 2vh;
 }
 
+.guests li {
+	max-height: min-content;
+}
+
 
 @media screen and (max-width: 1024px) and (min-width: 0px) {
 

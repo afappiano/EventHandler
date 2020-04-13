@@ -18,7 +18,7 @@
   <body>
   <div ng-controller="CreateCtrl">
 
-    <form ng-submit="createEvent()">
+    <!-- <form> -->
 
       <div class="left">
         <div class="map_container">
@@ -34,19 +34,19 @@
           <!-- <h2>Details</h2> -->
           <div class="form-group">
             <label for="eventName">Event Name</label>
-            <input type="text" class="form-control" id="eventName" ng-model="event.name">
+            <input type="text" class="form-control" id="eventName" ng-model="event.name" ng-required="required">
           </div>
           <div class="form-group">
             <label for="eventDesc">Description</label>
-            <textarea type="text" class="form-control" id="eventDesc" ng-model="event.desc"></textarea>
+            <textarea type="text" class="form-control" id="eventDesc" ng-model="event.desc" ng-required="required"></textarea>
           </div>
           <div class="form-group">
             <label for="eventTime">Time</label>
-            <input type="datetime-local" class="form-control" id="eventTime" ng-model="event.time">
+            <input type="datetime-local" class="form-control" id="eventTime" ng-model="event.time" ng-required="required">
           </div>
           <div class="form-group">
             <label for="eventLoc">Location</label>
-            <textarea type="text" class="form-control" ng-model="event.loc"></textarea>
+            <textarea type="text" class="form-control" ng-model="event.loc" ng-required="required"></textarea>
           </div>
 
           
@@ -55,27 +55,34 @@
 
       <div class="guests_container">
         <h2>Attendees</h2>
-        <ol class="guests">
-          <div class="guest" ng-repeat="attendee in event.attendees">
-            <div class="">
-
+        <ol class="guests list-group">
+          <li class="list-group-item" ng-repeat="attendee in event.attendees"  >
+            <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
+              <div class="mb-1 attendeeEmail">{{attendee.email}}</div>
+              <small class="text-muted attendeeStatus">{{attendee.status}}</small>
             </div>
-            <div class="attendeeStatus">
+            <form ng-show="editing" ng-submit="editing = false">
+              <input type="text" placeholder="Email" ng-model="attendee.email">
+              <button class="btn" type="submit">Save</button>
+              <button class="btn" type="button" ng-click="removeAttendee(attendee)">Delete</button>
+            </form>
 
-            </div>
-          </div>
+          </li>
         </ol>
-        <div class="form-group">
-          <label for="attendeeEmail">Email</label>
-          <input type="email" class="form-control" id="attendeeEmail" aria-describedby="emailHelp" placeholder="Email">
-          <div class="btn" id="invite_btn">Invite</div>
-        </div>
+        <form ng-show="visible" ng-submit="addAttendee()">
+          <!-- <label for="attendeeEmail">Email</label> -->
+          <input type="email" id="attendeeEmail" placeholder="Email" ng-model="newEmail" ng-required="required">
+          <button class="btn" id="invite_btn" type="submit">Invite</button>
+        </form>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" ng-click="visible = !visible">Add Attendee</button>
+
+
         
       </div>
       <div class="submit_container">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Event</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ng-click="createEvent()">Create Event</button>
       </div>
-    </form>
+    <!-- </form> -->
 
   </div>
     <!-- Optional JavaScript -->

@@ -49,44 +49,70 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   this.name = 'LoginCtrl';
   this.params = $routeParams;
 }])
-.controller('CreateCtrl', ['$routeParams', "$http", '$scope', function CreateCtrl($scope, $http, $routeParams) {
+.controller('CreateCtrl', ['$scope','$http','$routeParams',   function CreateCtrl($scope, $http, $routeParams) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
-  this.scope = $scope;
+  // $scope = $scope;
 
-  this.scope.event = {
-    // map: ,
-    name: "",
-    desc: "",
-    time: "",
-    loc: "",
-    attendees: []
-    
-  }
+  $scope.sortguests = function(a, b) {
+    if (a.email <= b.email) return -1;
+    else return 1;
+  },
+
+  $scope.event = {
+    // layout: ,
+    "name": "",
+    "desc": "",
+    "time": "",
+    "loc": "",
+    "attendees": []
+  },
+  $scope.newEmail = "";
+  $scope.visible = false;
+
+  
+  $scope.addAttendee = function () {
+    console.log("added");
+    $scope.event.attendees.push({
+      "email": $scope.newEmail,
+      "status": "Pending"
+    });
+    // 0 = pending, 1 = accepted, 2 = declined
+    $scope.newEmail = "";
+    $scope.visible = false;
+    $scope.event.attendees.sort(function(a,b) {
+      $scope.sortguests(a,b);
+    });
+  },
+
+  $scope.removeAttendee = function (item) {
+    var index = $scope.event.attendees.indexOf(item);
+    $scope.event.attendees.splice(index,1);
+  },
 
   //populate page with event to be edited
-  this.scope.editEvent = function (ev) {
-    this.scope.event = {
-      // map: ,
-      name: ev.name,
-      desc: ev.desc,
-      time: ev.time,
-      loc: ev.loc,
-      attendees: ev.attendees
+  $scope.editEvent = function (ev) {
+    $scope.event = {
+      // layout: ,
+      "name": ev.name,
+      "desc": ev.desc,
+      "time": ev.time,
+      "loc": ev.loc,
+      "attendees": ev.attendees
     }
   },
 
   //save edited event
-  this.scope.saveEvent = function () {
+  $scope.saveEvent = function () {
     //
-    var parameters = $.param(this.scope.event);
+    var parameters = $.param($scope.event);
 
     $http({
       method: "POST",
       header: {
         'Content-Type': "application/json",
       },
-      url: 'http://localhost:3000/api/events/edit?'+parameters,
+      url: '/api/events/edit?'+parameters,
       data: parameters
     }).then(function(res) {
       console.log("Event saved");
@@ -97,16 +123,17 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   }
 
   //save new event
-  this.scope.createEvent = function () {
-
-    var parameters = $.param(this.scope.event);
+  $scope.createEvent = function () {
+    console.log($scope.event);
+    var parameters = $.param($scope.event);
+    console.log(parameters);
 
     $http({
       method: "POST",
       header: {
         'Content-Type': "application/json",
       },
-      url: 'http://localhost:3000/api/events/new?'+parameters,
+      url: '/api/events/new',
       data: parameters
     }).then(function(res) {
       console.log("Event created");
@@ -131,8 +158,8 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 .controller('ManageCtrl', ['$routeParams', '$scope', function  ManageCtrl($scope, $routeParams) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
-  this.scope = $scope;
-  this.scope.isAccepted = function(num){
+  // $scope = $scope;
+  $scope.isAccepted = function(num){
     // if (/*pending*/) return 0;
     // if (/*declined*/) return 1;
     // if (/*accepted*/)

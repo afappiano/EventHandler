@@ -12,6 +12,18 @@ function wipe() {
     components = [];
 }
 
+function makeLabel(label) {
+    piece = 3;
+    pieces[piece].label = label;
+}
+
+var labels = [];
+function addLabel() {
+    var label = $(".labelText").val();
+    labels.push(label);
+    $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "'>" + label + "</option>");
+}
+
 function rectangle(width, height, color, x, y) {
     this.width = width;
     this.height = height;
@@ -50,6 +62,23 @@ function circle(radius, color, x, y) {
     }
     this.rescale = function() {
         this.radius = scale/2;
+    }
+}
+
+function text(color, x, y) {
+    this.x = x;
+    this.y = y;
+    this.label = "";
+    this.color = color;
+    this.size = scale;
+    this.update = function() {
+        ctx = myArea.context;
+        ctx.font = this.size + "px Arial";
+        ctx.fillStyle = this.color
+        ctx.fillText(this.label, this.x+10, this.y+10);
+    }
+    this.rescale = function() {
+        this.size = scale;
     }
 }
 
@@ -94,6 +123,7 @@ var scale = 20;
 pieces.push(new rectangle(scale, scale, "white", 0, 0));   // square
 pieces.push(new rectangle(scale*2, scale, "white", 0, 0));   // rectangle
 pieces.push(new circle(scale/2, "white", 0, 0));  // circle
+pieces.push(new text("black", 0, 0)); // text
 
 
 var myArea = {

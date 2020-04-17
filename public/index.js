@@ -58,22 +58,31 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     if (a.email <= b.email) return -1;
     else return 1;
   },
-
+// layout: ,
   $scope.event = {
-    // layout: ,
     "name": "",
     "desc": "",
     "time": "",
     "loc": "",
     "attendees": []
   },
+  // $scope.event = {
+  //   // layout: ,
+  //   "name": "asdf",
+  //   "desc": "asdf",
+  //   "time": "Sat%20Apr%2025%202020%2001%3A01%3A00%20GMT-0400%20(Eastern%20Daylight%20Time)",
+  //   "loc": "asdf",
+  //   "attendees": [{email: "alexwenzhenhe@gmail.com", status: "Pending"}]
+  // },
+  
+  
   $scope.newEmail = "";
   $scope.visible = false;
 
   
   $scope.addAttendee = function () {
     console.log("added");
-    $scope.event.attendees.push({
+    $scope.event["attendees"].push({
       "email": $scope.newEmail,
       "status": "Pending"
     });
@@ -170,7 +179,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
 
 
-$(document).ready(function () {
-  app.p
+// $(document).ready(function () {
+//   app.p
 
-});
+// });

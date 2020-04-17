@@ -53,36 +53,36 @@ app.post('/api/user/register', (req, res) => {
 app.post('/api/events/new', (req, res) => {
   console.log(req);
 
-  var event = req.body;
+  // var event = req.body;
 
-	if(event.name == ""){
-		res.status(400).send({
-			error: "Missing name"
-		});
-	}
-	else if(event.desc == ""){
-		res.status(400).send({
-			error: "Missing description"
-		});
-  }
-	else if(event.time == ""){
-		res.status(400).send({
-			error: "Missing time"
-		});
-  }
-  else if(event.loc == ""){
-		res.status(400).send({
-			error: "Missing location"
-		});
-  }
-  else {
-    dbo.collection("events").insertOne(event, function(err, res) {
-      if (err) throw err;
-      // console.log("Data inserted...");
-      db.close();
-    });
+	// if(event.name == ""){
+	// 	res.status(400).send({
+	// 		error: "Missing name"
+	// 	});
+	// }
+	// else if(event.desc == ""){
+	// 	res.status(400).send({
+	// 		error: "Missing description"
+	// 	});
+  // }
+	// else if(event.time == ""){
+	// 	res.status(400).send({
+	// 		error: "Missing time"
+	// 	});
+  // }
+  // else if(event.loc == ""){
+	// 	res.status(400).send({
+	// 		error: "Missing location"
+	// 	});
+  // }
+  // else {
+  //   dbo.collection("events").insertOne(event, function(err, res) {
+  //     if (err) throw err;
+  //     // console.log("Data inserted...");
+  //     db.close();
+  //   });
 
-  }
+  // }
 
   
 });

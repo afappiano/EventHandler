@@ -60,19 +60,19 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 // layout: ,
   $scope.event = {
-    "name": "",
-    "desc": "",
-    "time": "",
-    "loc": "",
-    "attendees": []
+    name: "",
+    desc: "",
+    time: "",
+    loc: "",
+    attendees: []
   },
   // $scope.event = {
   //   // layout: ,
-  //   "name": "asdf",
-  //   "desc": "asdf",
-  //   "time": "Sat%20Apr%2025%202020%2001%3A01%3A00%20GMT-0400%20(Eastern%20Daylight%20Time)",
-  //   "loc": "asdf",
-  //   "attendees": [{email: "alexwenzhenhe@gmail.com", status: "Pending"}]
+  //   name: "asdf",
+  //   desc: "asdf",
+  //   time: "Sat%20Apr%2025%202020%2001%3A01%3A00%20GMT-0400%20(Eastern%20Daylight%20Time)",
+  //   loc: "asdf",
+  //   attendees: [{email: "alexwenzhenhe@gmail.com", status: "Pending"}]
   // },
   
   
@@ -103,11 +103,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   $scope.editEvent = function (ev) {
     $scope.event = {
       // layout: ,
-      "name": ev.name,
-      "desc": ev.desc,
-      "time": ev.time,
-      "loc": ev.loc,
-      "attendees": ev.attendees
+      name: ev.name,
+      desc: ev.desc,
+      time: ev.time,
+      loc: ev.loc,
+      attendees: ev.attendees
     }
   },
 

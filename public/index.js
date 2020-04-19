@@ -48,6 +48,39 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 .controller('LoginCtrl', ['$routeParams', function LoginCtrl($routeParams) {
   this.name = 'LoginCtrl';
   this.params = $routeParams;
+
+    //save new event
+    $scope.signup = function (email, password) {
+      //hash password
+
+      var parameters = {
+
+      }
+      // var parameters = $.param($scope.event);
+      
+      console.log(parameters);
+  
+      // JSON.parse(parameters);
+  
+      $http({
+        method: "POST",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/register',
+        data: parameters
+      }).then(function(res) {
+        console.log(res);
+        console.log("User created");
+      },
+      function(res) {
+        console.log('error', res);
+      });
+  
+  
+    }
+  
+    
 }])
 .controller('CreateCtrl', ['$scope','$http','$routeParams',   function CreateCtrl($scope, $http, $routeParams) {
   this.name = 'CreateCtrl';
@@ -66,15 +99,6 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     loc: "",
     attendees: []
   },
-  // $scope.event = {
-  //   // layout: ,
-  //   name: "asdf",
-  //   desc: "asdf",
-  //   time: "Sat%20Apr%2025%202020%2001%3A01%3A00%20GMT-0400%20(Eastern%20Daylight%20Time)",
-  //   loc: "asdf",
-  //   attendees: [{email: "alexwenzhenhe@gmail.com", status: "Pending"}]
-  // },
-  
   
   $scope.newEmail = "";
   $scope.visible = false;
@@ -83,8 +107,8 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   $scope.addAttendee = function () {
     console.log("added");
     $scope.event["attendees"].push({
-      "email": $scope.newEmail,
-      "status": "Pending"
+      email: $scope.newEmail,
+      status: "Pending"
     });
     // 0 = pending, 1 = accepted, 2 = declined
     $scope.newEmail = "";
@@ -101,6 +125,8 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
   //populate page with event to be edited
   $scope.editEvent = function (ev) {
+    //choose event
+    
     $scope.event = {
       // layout: ,
       name: ev.name,
@@ -114,15 +140,15 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   //save edited event
   $scope.saveEvent = function () {
     //
-    var parameters = $.param($scope.event);
+    // var parameters = $.param($scope.event);
 
     $http({
       method: "POST",
       header: {
         'Content-Type': "application/json",
       },
-      url: '/api/events/edit?'+parameters,
-      data: parameters
+      url: '/api/events/edit',
+      data: $scope.event
     }).then(function(res) {
       console.log("Event saved");
     },
@@ -134,8 +160,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   //save new event
   $scope.createEvent = function () {
     console.log($scope.event);
-    var parameters = $.param($scope.event);
-    console.log(parameters);
+    // var parameters = $.param($scope.event);
+
+    // JSON.parse(parameters);
 
     $http({
       method: "POST",
@@ -143,8 +170,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
         'Content-Type': "application/json",
       },
       url: '/api/events/new',
-      data: parameters
+      data: $scope.event
     }).then(function(res) {
+      console.log(res);
       console.log("Event created");
     },
     function(res) {

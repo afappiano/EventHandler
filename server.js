@@ -44,45 +44,49 @@ app.post('/api/user/register', (req, res) => {
 		}
 		// Create account
 		else{
-			res.sendStatus(200);
+			// res.sendStatus(200);
+			db.collection("users").insertOne(req.body, function(err, result) {
+				if (err) throw err;
+				res.status(200).send({message:"User inserted"});
+			});
+	
 		}
 	}
 });
 
 // create new event
 app.post('/api/events/new', (req, res) => {
-  console.log(req);
+	// console.log(req);
 
-  // var event = req.body;
+  var event = req.body;
 
-	// if(event.name == ""){
-	// 	res.status(400).send({
-	// 		error: "Missing name"
-	// 	});
-	// }
-	// else if(event.desc == ""){
-	// 	res.status(400).send({
-	// 		error: "Missing description"
-	// 	});
-  // }
-	// else if(event.time == ""){
-	// 	res.status(400).send({
-	// 		error: "Missing time"
-	// 	});
-  // }
-  // else if(event.loc == ""){
-	// 	res.status(400).send({
-	// 		error: "Missing location"
-	// 	});
-  // }
-  // else {
-  //   dbo.collection("events").insertOne(event, function(err, res) {
-  //     if (err) throw err;
-  //     // console.log("Data inserted...");
-  //     db.close();
-  //   });
+	if(event.name == ""){
+		res.status(400).send({
+			error: "Missing name"
+		});
+	}
+	else if(event.desc == ""){
+		res.status(400).send({
+			error: "Missing description"
+		});
+  }
+	else if(event.time == ""){
+		res.status(400).send({
+			error: "Missing time"
+		});
+  }
+  else if(event.loc == ""){
+		res.status(400).send({
+			error: "Missing location"
+		});
+  }
+  else {
+    db.collection("events").insertOne(event, function(err, result) {
+      if (err) throw err;
+			res.status(200).send({message:"Event inserted"});
+    });
 
-  // }
+  }
 
   
 });

@@ -139,7 +139,7 @@ body{
 	transition: 0.5s;
 	display: block;
 	width: auto;
-	max-width: 10vw;
+	/* max-width: 10vw; */
 	text-align: center;
 	margin: 1vh auto;
 }
@@ -248,10 +248,10 @@ a:hover{
 		width: 100vw;
 	}
 
-	input{
+	/* input{
 		width: 25vw;
 		max-width: 25vw;
-	}
+	} */
 
 }
 

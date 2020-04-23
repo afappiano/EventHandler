@@ -5,6 +5,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+var bp = require('body-parser');
+app.use(bp.urlencoded({ extended: true })); 
+
 // Serve static files from public directory
 app.use(express.static('public'));
 
@@ -53,6 +56,89 @@ app.post('/api/user/register', (req, res) => {
 		}
 	}
 });
+
+
+//==========================================================================
+app.post('/api/user/test', (req, res) => {
+
+	console.log(req.body);
+
+	var login = req.body.login == "login";
+
+	var email = req.body.email;
+	var password = req.body.password;
+
+
+	console.log("received " + login + " " + password + " " + email);
+
+	// Check if email is present
+	if(email == ""){
+		res.status(400).send({
+			error: "Missing email"
+		});
+	}
+	// Check if password is present
+	else if(password == ""){
+		res.status(400).send({
+			error: "Missing password"
+		});
+	}
+
+	if(login == false){
+		// Check if password meets requirements (At least 12 characters)
+		if(password.length < 12){
+			res.status(400).send({
+				error: "Password is too short"
+			});
+		}
+		// Check if email is available
+		else if(db.collection("users").countDocuments({email:email}) > 0){
+			res.status(400).send({
+				error: "Email is not available"
+			});
+		}
+		// Create account
+		else{
+			// res.sendStatus(200);
+			db.collection("users").insertOne(req.body, function(err, result) {
+				if (err) throw err;
+				res.status(200).send({message:"User inserted"});
+			});
+	
+		}
+	}
+
+	
+
+	
+	// else{
+	// 	// Check if password meets requirements (At least 12 characters)
+	// 	if(password.length < 12){
+	// 		res.status(400).send({
+	// 			error: "Password is too short"
+	// 		});
+	// 	}
+	// 	// Check if email is available
+	// 	else if(db.collection("users").countDocuments({email:email}) > 0){
+	// 		res.status(400).send({
+	// 			error: "Email is not available"
+	// 		});
+	// 	}
+	// 	// Create account
+	// 	else{
+	// 		// res.sendStatus(200);
+	// 		db.collection("users").insertOne(req.body, function(err, result) {
+	// 			if (err) throw err;
+	// 			res.status(200).send({message:"User inserted"});
+	// 		});
+	
+	// 	}
+	// }
+});
+//==========================================================================
+
+
+
 
 // create new event
 app.post('/api/events/new', (req, res) => {

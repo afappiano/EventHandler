@@ -15,6 +15,8 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // API Routes
+
+// OLD REGISTER
 app.post('/api/user/register', (req, res) => {
 
 	let email = req.body['email'];
@@ -50,7 +52,8 @@ app.post('/api/user/register', (req, res) => {
 			// res.sendStatus(200);
 			db.collection("users").insertOne(req.body, function(err, result) {
 				if (err) throw err;
-				res.status(200).send({message:"User inserted"});
+				// res.status(200).send({message:"User inserted"});
+				res.status(200).send('manage');
 			});
 	
 		}
@@ -58,18 +61,17 @@ app.post('/api/user/register', (req, res) => {
 });
 
 
+// NEW REGISTER / LOGIN
 //==========================================================================
 app.post('/api/user/test', (req, res) => {
 
-	console.log(req.body);
+	// console.log(req.body);
 
-	var login = req.body.login == "login";
+	var login = req.body.login == "login"; // login variable will either be 'login' or 'sign up'
 
 	var email = req.body.email;
 	var password = req.body.password;
 
-
-	console.log("received " + login + " " + password + " " + email);
 
 	// Check if email is present
 	if(email == ""){
@@ -84,7 +86,7 @@ app.post('/api/user/test', (req, res) => {
 		});
 	}
 
-	if(login == false){
+	if(login == false){		// REGISTER
 		// Check if password meets requirements (At least 12 characters)
 		if(password.length < 12){
 			res.status(400).send({
@@ -99,41 +101,26 @@ app.post('/api/user/test', (req, res) => {
 		}
 		// Create account
 		else{
-			// res.sendStatus(200);
-			db.collection("users").insertOne(req.body, function(err, result) {
+			var user = Object.create(null);
+			user.email = email;
+			user.password = password;
+
+			// console.log(user);
+			db.collection("users").insertOne(user, function(err, result) {
 				if (err) throw err;
 				res.status(200).send({message:"User inserted"});
+				// res.status(200).send('/manage'); // this doesn't work
 			});
 	
 		}
+	} else { // LOGIN - unfinished
+		if(db.collection("users").countDocuments({email:email}) == 0){
+			res.status(400).send({
+				error: "Username or password is incorrect"
+			});
+		}
 	}
 
-	
-
-	
-	// else{
-	// 	// Check if password meets requirements (At least 12 characters)
-	// 	if(password.length < 12){
-	// 		res.status(400).send({
-	// 			error: "Password is too short"
-	// 		});
-	// 	}
-	// 	// Check if email is available
-	// 	else if(db.collection("users").countDocuments({email:email}) > 0){
-	// 		res.status(400).send({
-	// 			error: "Email is not available"
-	// 		});
-	// 	}
-	// 	// Create account
-	// 	else{
-	// 		// res.sendStatus(200);
-	// 		db.collection("users").insertOne(req.body, function(err, result) {
-	// 			if (err) throw err;
-	// 			res.status(200).send({message:"User inserted"});
-	// 		});
-	
-	// 	}
-	// }
 });
 //==========================================================================
 

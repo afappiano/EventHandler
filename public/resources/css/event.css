@@ -139,7 +139,7 @@ body{
 	transition: 0.5s;
 	display: block;
 	width: auto;
-	max-width: 10vw;
+	/* max-width: 10vw; */
 	text-align: center;
 	margin: 1vh auto;
 }
@@ -156,12 +156,16 @@ a:hover{
 
 .map_container, .desc_container{
 	width: 40vw;
-	height: 40vh;
-	text-align: center;
+	height: 35vh;
+	text-align: left;
 	/* border: 1px solid pink; */
 	margin-top: 2vh;
 	display: block;
 	margin-left: 5vw;
+}
+
+.desc_container label {
+	font-size: 1.1em;
 }
 
 .map{
@@ -188,7 +192,7 @@ a:hover{
 	float: right;
 	clear: right;
 	width: 40vw;
-	height: 82vh;
+	height: 70vh;
 	margin-right: 5vw;
 	text-align: center;
 	/* border: 1px solid yellow; */
@@ -197,15 +201,34 @@ a:hover{
 	/*position: relative;*/
 }
 
+.submit_container{
+	float: right;
+	clear: right;
+	width: 40vw;
+	height: 5vh;
+	margin-right: 5vw;
+	text-align: center;
+	display: block;
+	margin-top: 2vh;
+}
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+.guests li {
+	max-height: min-content;
+}
 
-	.map_container, .desc_container, .guests_container{
+
+@media screen and (max-width: 1024px) and (min-width: 0px) {
+
+	.map_container, .desc_container, .guests_container, .submit_container{
 		width: 80vw;
 		margin: 2vh 10vw;
 		float: none;
 		clear: none;
 		display: block;
+	}
+
+	.guests_container {
+		margin-top: 16vh;
 	}
 
 	.left{
@@ -219,19 +242,18 @@ a:hover{
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
 
 	.header{
 		width: 100vw;
 	}
 
-	input{
+	/* input{
 		width: 25vw;
 		max-width: 25vw;
-	}
+	} */
 
 }
-/*>>>>>>> Stashed changes:resources/css/event.css*/
 
 
 

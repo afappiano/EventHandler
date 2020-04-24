@@ -2,7 +2,7 @@
 
 
 
-var app = angular.module('app', ['ngRoute', 'ngAnimate'])
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 .config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
@@ -48,10 +48,141 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
 .controller('LoginCtrl', ['$routeParams', function LoginCtrl($routeParams) {
   this.name = 'LoginCtrl';
   this.params = $routeParams;
+
+    //save new event
+    $scope.signup = function (email, password) {
+      //hash password
+
+      var parameters = {
+
+      }
+      // var parameters = $.param($scope.event);
+      
+      console.log(parameters);
+  
+      // JSON.parse(parameters);
+  
+      $http({
+        method: "POST",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/register',
+        data: parameters
+      }).then(function(res) {
+        console.log(res);
+        console.log("User created");
+      },
+      function(res) {
+        console.log('error', res);
+      });
+  
+  
+    }
+  
+    
 }])
-.controller('CreateCtrl', ['$routeParams', function CreateCtrl($routeParams) {
+.controller('CreateCtrl', ['$scope','$http','$routeParams',   function CreateCtrl($scope, $http, $routeParams) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
+  // $scope = $scope;
+
+  $scope.sortguests = function(a, b) {
+    if (a.email <= b.email) return -1;
+    else return 1;
+  },
+// layout: ,
+  $scope.event = {
+    name: "",
+    desc: "",
+    time: "",
+    loc: "",
+    attendees: []
+  },
+  
+  $scope.newEmail = "";
+  $scope.visible = false;
+
+  
+  $scope.addAttendee = function () {
+    console.log("added");
+    $scope.event["attendees"].push({
+      email: $scope.newEmail,
+      status: "Pending"
+    });
+    // 0 = pending, 1 = accepted, 2 = declined
+    $scope.newEmail = "";
+    $scope.visible = false;
+    $scope.event.attendees.sort(function(a,b) {
+      $scope.sortguests(a,b);
+    });
+  },
+
+  $scope.removeAttendee = function (item) {
+    var index = $scope.event.attendees.indexOf(item);
+    $scope.event.attendees.splice(index,1);
+  },
+
+  //populate page with event to be edited
+  $scope.editEvent = function (ev) {
+    //choose event
+    
+    $scope.event = {
+      // layout: ,
+      name: ev.name,
+      desc: ev.desc,
+      time: ev.time,
+      loc: ev.loc,
+      attendees: ev.attendees
+    }
+  },
+
+  //save edited event
+  $scope.saveEvent = function () {
+    //
+    // var parameters = $.param($scope.event);
+
+    $http({
+      method: "POST",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: '/api/events/edit',
+      data: $scope.event
+    }).then(function(res) {
+      console.log("Event saved");
+    },
+    function(res) {
+      console.log('error', res);
+    });
+  }
+
+  //save new event
+  $scope.createEvent = function () {
+    console.log($scope.event);
+    // var parameters = $.param($scope.event);
+
+    // JSON.parse(parameters);
+
+    $http({
+      method: "POST",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: '/api/events/new',
+      data: $scope.event
+    }).then(function(res) {
+      console.log(res);
+      console.log("Event created");
+    },
+    function(res) {
+      console.log('error', res);
+    });
+
+
+  }
+  
+
 }])
 .controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
   this.name = 'AttendCtrl';
@@ -61,14 +192,22 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate'])
   this.name = 'RegCtrl';
   this.params = $routeParams;
 }])
-.controller('ManageCtrl', ['$routeParams', function  ManageCtrl($routeParams) {
+.controller('ManageCtrl', ['$routeParams', '$scope', function  ManageCtrl($scope, $routeParams) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
+  // $scope = $scope;
+  $scope.isAccepted = function(num){
+    // if (/*pending*/) return 0;
+    // if (/*declined*/) return 1;
+    // if (/*accepted*/)
+    console.log(num);
+    return num;
+  }
 }]);
 
 
 
-$(document).ready(function () {
-  app.p
+// $(document).ready(function () {
+//   app.p
 
-});
+// });

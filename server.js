@@ -67,7 +67,7 @@ app.post('/api/user/test', (req, res) => {
 
 	// console.log(req.body);
 
-	var login = req.body.login == "login"; // login variable will either be 'login' or 'sign up'
+	var login = req.body.login == "Login"; // login variable will either be 'Login' or 'Sign up'
 
 	var email = req.body.email;
 	var password = req.body.password;

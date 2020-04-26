@@ -4,7 +4,7 @@ require('dotenv').config();
 // Express
 const express = require('express');
 const app = express();
-
+var ObjectID = require('mongodb').ObjectID;
 var bp = require('body-parser');
 app.use(bp.urlencoded({ extended: true })); 
 
@@ -166,7 +166,41 @@ app.post('/api/events/new', (req, res) => {
 
 // edit event
 app.post('/api/events/edit', (req, res) => {
-
+	var event = req.body;
+	if(event.name == ""){
+		res.status(400).send({
+			error: "Missing name"
+		});
+	}
+	else if(event.desc == ""){
+		res.status(400).send({
+			error: "Missing description"
+		});
+  }
+	else if(event.time == ""){
+		res.status(400).send({
+			error: "Missing time"
+		});
+  }
+  else if(event.loc == ""){
+		res.status(400).send({
+			error: "Missing location"
+		});
+  }
+  else {
+	var searchid = { _id: ObjectID(event._id) }
+	var changes = { $set: {
+      name: event.name,
+      desc: event.desc,
+      time: event.time,
+      loc: event.loc,
+      attendees: event.attendees
+	}}
+    db.collection("events").updateOne(searchid, changes, function(err, result) {
+      	if (err) throw err;
+			res.status(200).send({message:"Event updated"});
+    });
+  }
 });
 
 // get current user's events

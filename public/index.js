@@ -115,7 +115,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
   $scope.populate = function() {
     if ($scope.editEvent.event == null) $scope.event = $scope.empty;
-    else $scope.event = $scope.editEvent.event;
+    else {
+      $scope.event = $scope.editEvent.event;
+      $scope.event.time = new Date($scope.editEvent.event.time);
+    }
   },
   
   $scope.newEmail = "";
@@ -168,12 +171,13 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       url: '/api/events/edit',
       data: $scope.event
     }).then(function(res) {
+      console.log(res);
       console.log("Event saved");
     },
     function(res) {
       console.log('error', res);
     });
-  }
+  },
 
   //save new event
   $scope.createEvent = function () {

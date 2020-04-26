@@ -7,6 +7,22 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 
+// Express Session
+const express_session = require('express-session');
+const connect_mongo = require('connect-mongo')(express_session);
+app.use(express_session({
+	cookie: {
+		maxAge: 3600000
+	},
+	name: "eh_session",
+	rolling: true,
+	secret: "cactus",
+	store: new connect_mongo({
+		url: process.env['MONGO_URL'],
+		dbName: process.env['MONGO_DB']
+	})
+}));
+
 // Serve static files from public directory
 app.use(express.static('public'));
 
@@ -74,6 +90,7 @@ app.post('/api/user/register', (req, res) => {
 			});
 		}
 	}
+
 });
 app.post('/api/user/login', ((req, res) => {
 
@@ -111,7 +128,15 @@ app.post('/api/user/login', ((req, res) => {
 							});
 						}else if(compare_result){
 							// Login successful
-							res.sendStatus(200);
+							req.session.regenerate((err_regen) => {
+								if(err_regen){
+									res.status(500).send({
+										error: "Error regenerating session"
+									});
+								}
+								req.session['userID'] = database_result['_id'];
+								res.sendStatus(200);
+							});
 						}else{
 							res.status(401).send({
 								error: "Invalid credentials"

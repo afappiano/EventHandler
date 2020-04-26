@@ -2,6 +2,7 @@
 require('dotenv').config();
 
 const bcrypt = require('bcrypt');
+const bson = require('bson');
 
 // Express
 const express = require('express');
@@ -22,6 +23,33 @@ app.use(express_session({
 		dbName: process.env['MONGO_DB']
 	})
 }));
+
+// Middleware for login session stuff
+app.use((req, res, next) => {
+
+	req.isLoggedIn = function(){
+		return req.session['userID'] !== undefined;
+	}
+
+	// Callback takes two parameters: err and user
+	req.getCurrentUser = function(callback){
+		if(!req.isLoggedIn()){
+			res.status(401).send({
+				error: "Not logged in"
+			});
+			if(typeof callback == 'function') callback(new Error("Not logged in"));
+		}else{
+			db.collection('users').findOne({_id:bson.ObjectId(req.session['userID'])}, {projection: {_id: true, email: true}}, (err, result) => {
+				if(err) return callback(err);
+				else{
+					if(typeof callback == 'function') callback(null, result);
+				}
+			});
+		}
+	}
+
+	next();
+});
 
 // Serve static files from public directory
 app.use(express.static('public'));
@@ -157,6 +185,17 @@ app.get('/api/user/logout', (req, res) => {
 		});
 		else{
 			res.sendStatus(200);
+		}
+	});
+
+});
+// Example route that checks if a user is logged in and if they are, returns their info, otherwise returns 401 with an error message
+app.get('/s3cr3t', (req, res) => {
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			res.send(user);
 		}
 	});
 

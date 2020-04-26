@@ -149,6 +149,18 @@ app.post('/api/user/login', ((req, res) => {
 	}
 
 }));
+app.get('/api/user/logout', (req, res) => {
+
+	req.session.destroy((err) => {
+		if(err) res.status(500).send({
+			error: "Failed to destroy session"
+		});
+		else{
+			res.sendStatus(200);
+		}
+	});
+
+});
 
 // MongoDB
 const mongodb = require('mongodb');

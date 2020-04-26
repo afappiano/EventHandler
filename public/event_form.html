@@ -16,7 +16,7 @@
     <title>Create Event</title>
   </head>
   <body>
-  <div ng-controller="CreateCtrl">
+  <div ng-controller="CreateCtrl" ng-init="populate()">
 
     <!-- <form> -->
 
@@ -80,7 +80,8 @@
         
       </div>
       <div class="submit_container">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ng-click="createEvent()">Create Event</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" name="new" type="submit" ng-click="createEvent()" ng-hide="editEvent.event != null">Create Event</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" name="update" type="submit" ng-click="saveEvent()" ng-hide="editEvent.event == null">Save Changes</button>
       </div>
     <!-- </form> -->
 

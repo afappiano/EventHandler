@@ -17,7 +17,7 @@
     <title>Manage Event</title>
   </head>
   <body >
-    <div ng-controller="ManageCtrl">
+    <div ng-controller="ManageCtrl" >
 
       <div class="left">
         <div class="calendar_container nav nav-pills mb-3" role="tablist">
@@ -55,11 +55,12 @@
       <div class="events_container">
         <!-- <h2>Your Events</h2> -->
         <div class="events tab-content">
-          <div class="tab-pane fade" id="your-events" role="tabpanel" aria-labelledby="your-events-tab">
+          <div class="tab-pane fade" id="your-events" role="tabpanel" aria-labelledby="your-events-tab" ng-init="getYourEvents()">
             <h2>Your Events</h2>
-            <a href="#"><div class="btn">Event 1</div></a>
+            <a class="btn" ng-repeat="event in yourEvents" ng-click="editRedirect(event)" href="/edit">{{event.name}}</a>
+            <!-- <a href="#"><div class="btn">Event 1</div></a>
             <a href="#"><div class="btn">Event 2</div></a>
-            <a href="#"><div class="btn">etc</div></a>
+            <a href="#"><div class="btn">etc</div></a> -->
           </div>
           <!-- <div class="tab-pane fade" id="attending-events" role="tabpanel" aria-labelledby="attending-events-tab">
             <h2>Attending</h2>
@@ -67,7 +68,7 @@
             <a href="attending"><div class="btn">Event 2</div></a>
             <a href="attending"><div class="btn">etc</div></a>
           </div> -->
-          <div class="tab-pane fade" id="invited-events" role="tabpanel" aria-labelledby="invited-events-tab">
+          <div class="tab-pane fade" id="invited-events" role="tabpanel" aria-labelledby="invited-events-tab" ng-init="getInvites()">
             <h2>Invitations</h2>
             <!-- <div class="pending" ng-switch on="isAccepted(0)">
               <div class="btn">Event 1</div>

@@ -21,6 +21,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
         controller: 'CreateCtrl',
         controllerAs: 'create'
       })
+      .when('/edit', {
+        templateUrl: 'event_form.html',
+        controller: 'CreateCtrl',
+        controllerAs: 'edit'
+      })
       .when('/attending', {
         templateUrl: 'attendee_view.html',
         controller: 'AttendCtrl',
@@ -39,13 +44,17 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
     $locationProvider.html5Mode(true);
 }])
-.controller('MainCtrl', ['$route', '$routeParams', '$location',
-  function MainCtrl($route, $routeParams, $location) {
+.controller('MainCtrl', ['$route', '$routeParams', '$location', '$scope', 'editEvent',
+  function MainCtrl($route, $routeParams, $location, $scope, editEvent) {
     this.$route = $route;
     this.$location = $location;
     this.$routeParams = $routeParams;
+    $scope.editEvent = editEvent;
+    $scope.newEvent = function () {
+      $scope.editEvent.event = null;
+    }
 }])
-.controller('LoginCtrl', ['$routeParams', function LoginCtrl($routeParams) {
+.controller('LoginCtrl', ['$scope','$http','$routeParams', function LoginCtrl($scope, $http, $routeParams) {
   this.name = 'LoginCtrl';
   this.params = $routeParams;
 
@@ -82,22 +91,31 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   
     
 }])
-.controller('CreateCtrl', ['$scope','$http','$routeParams',   function CreateCtrl($scope, $http, $routeParams) {
+.controller('CreateCtrl', ['$scope','$http','$routeParams', 'editEvent',  function CreateCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
   // $scope = $scope;
+  $scope.editEvent = editEvent;
 
-  $scope.sortguests = function(a, b) {
-    if (a.email <= b.email) return -1;
-    else return 1;
-  },
-// layout: ,
-  $scope.event = {
+  $scope.empty = {
+    // layout: ,
     name: "",
     desc: "",
     time: "",
     loc: "",
     attendees: []
+  },
+
+  $scope.editing = false;
+
+  $scope.sortguests = function(a, b) {
+    if (a.email <= b.email) return -1;
+    else return 1;
+  },
+
+  $scope.populate = function() {
+    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    else $scope.event = $scope.editEvent.event;
   },
   
   $scope.newEmail = "";
@@ -124,18 +142,18 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   //populate page with event to be edited
-  $scope.editEvent = function (ev) {
-    //choose event
+  // $scope.editEvent = function (ev) {
+  //   //choose event
     
-    $scope.event = {
-      // layout: ,
-      name: ev.name,
-      desc: ev.desc,
-      time: ev.time,
-      loc: ev.loc,
-      attendees: ev.attendees
-    }
-  },
+  //   $scope.event = {
+  //     // layout: ,
+  //     name: ev.name,
+  //     desc: ev.desc,
+  //     time: ev.time,
+  //     loc: ev.loc,
+  //     attendees: ev.attendees
+  //   }
+  // },
 
   //save edited event
   $scope.saveEvent = function () {
@@ -160,9 +178,6 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   //save new event
   $scope.createEvent = function () {
     console.log($scope.event);
-    // var parameters = $.param($scope.event);
-
-    // JSON.parse(parameters);
 
     $http({
       method: "POST",
@@ -192,18 +207,70 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   this.name = 'RegCtrl';
   this.params = $routeParams;
 }])
-.controller('ManageCtrl', ['$routeParams', '$scope', function  ManageCtrl($scope, $routeParams) {
+.controller('ManageCtrl', ['$scope','$http','$routeParams', 'editEvent',  function ManageCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
   // $scope = $scope;
+  $scope.editEvent = editEvent;
+
   $scope.isAccepted = function(num){
     // if (/*pending*/) return 0;
     // if (/*declined*/) return 1;
     // if (/*accepted*/)
     console.log(num);
     return num;
+  },
+
+  $scope.getYourEvents = function() {
+    $http({
+      method: "GET",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: '/api/events/hosting'
+      //,
+      // data: $scope.event
+    }).then(function(res) {
+      // console.log(res);
+      console.log("Events found");
+      $scope.yourEvents = res.data;
+      console.log($scope.yourEvents);
+    },
+    function(res) {
+      console.log('error', res);
+    });
+  },
+
+  $scope.getInvites = function() {
+    $http({
+      method: "GET",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: '/api/events/invited'
+      //,
+      // data: $scope.event
+    }).then(function(res) {
+      // console.log(res);
+      console.log("Events found");
+      $scope.yourEvents = res.data;
+      console.log($scope.yourEvents);
+    },
+    function(res) {
+      console.log('error', res);
+    });
+  },
+
+  $scope.editRedirect = function(event) {
+    console.log("Redirect...");
+    $scope.editEvent.event = event;
+    console.log($scope.editEvent.event);
   }
-}]);
+
+}])
+.service('editEvent', function () {
+  this.event = null;
+});
 
 
 

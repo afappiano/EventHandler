@@ -169,6 +169,21 @@ app.post('/api/events/edit', (req, res) => {
 
 });
 
+// get current user's events
+app.get('/api/events/hosting', (req, res) => {
+	db.collection("events").find({ /*"user" : currentuser*/ }).sort({"time":-1}).toArray(function(err, result) {
+        if (err) throw err;
+        else {
+          // console.log(result);
+          res.status(200).send(result);
+        }
+	});
+});
+
+// get current user's invites
+app.get('/api/events/invited', (req, res) => {
+	
+});
 
 // MongoDB
 const mongodb = require('mongodb');

@@ -156,7 +156,7 @@ a:hover{
 
 .map_container, .desc_container{
 	width: 40vw;
-	height: 35vh;
+	height: auto;
 	text-align: left;
 	/* border: 1px solid pink; */
 	margin-top: 2vh;

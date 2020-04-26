@@ -1,12 +1,58 @@
 // Get values from .env file
 require('dotenv').config();
 
+const bcrypt = require('bcrypt');
+const bson = require('bson');
+
 // Express
 const express = require('express');
 const app = express();
 var ObjectID = require('mongodb').ObjectID;
 var bp = require('body-parser');
-app.use(bp.urlencoded({ extended: true })); 
+app.use(bp.urlencoded({ extended: true }));
+
+// Express Session
+const express_session = require('express-session');
+const connect_mongo = require('connect-mongo')(express_session);
+app.use(express_session({
+	cookie: {
+		maxAge: 3600000
+	},
+	name: "eh_session",
+	rolling: true,
+	secret: "cactus",
+	store: new connect_mongo({
+		url: process.env['MONGO_URL'],
+		dbName: process.env['MONGO_DB']
+	})
+}));
+
+// Middleware for login session stuff
+app.use((req, res, next) => {
+
+	req.isLoggedIn = function(){
+		return req.session['userID'] !== undefined;
+	}
+
+	// Callback takes two parameters: err and user
+	req.getCurrentUser = function(callback){
+		if(!req.isLoggedIn()){
+			res.status(401).send({
+				error: "Not logged in"
+			});
+			if(typeof callback == 'function') callback(new Error("Not logged in"));
+		}else{
+			db.collection('users').findOne({_id:bson.ObjectId(req.session['userID'])}, {projection: {_id: true, email: true}}, (err, result) => {
+				if(err) return callback(err);
+				else{
+					if(typeof callback == 'function') callback(null, result);
+				}
+			});
+		}
+	}
+
+	next();
+});
 
 // Serve static files from public directory
 app.use(express.static('public'));
@@ -15,21 +61,19 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // API Routes
-
-// OLD REGISTER
 app.post('/api/user/register', (req, res) => {
 
 	let email = req.body['email'];
 	let password = req.body['password'];
 
-	// Check if email is present
-	if(email == ""){
+	// Check if email is present TODO: check if email is valid (and don't accept blank emails)
+	if(email === undefined){
 		res.status(400).send({
 			error: "Missing email"
 		});
 	}
 	// Check if password is present
-	else if(password == ""){
+	else if(password === undefined){
 		res.status(400).send({
 			error: "Missing password"
 		});
@@ -40,92 +84,114 @@ app.post('/api/user/register', (req, res) => {
 			res.status(400).send({
 				error: "Password is too short"
 			});
-		}
-		// Check if email is available
-		else if(db.collection("users").countDocuments({email:email}) > 0){
-			res.status(400).send({
-				error: "Email is not available"
+		}else{
+			// Check if email is available
+			db.collection('users').countDocuments({email:email}).then((result) => {
+				if(result > 0){
+					res.status(400).send({
+						error: "Email is not available"
+					});
+				}else{
+					// Create the account if it is
+					bcrypt.hash(password, 10, (err, hash) => {
+						if(err){
+							res.status(500).send({
+								error: "Failed to hash password"
+							});
+							throw err;
+						}else{
+							db.collection('users').insertOne({
+								email: email,
+								password: hash
+							}).then(() => {
+								res.sendStatus(200);
+							}).catch((err) => {
+								res.status(500).send({
+									error: "Failed to insert user into database"
+								});
+								throw err;
+							});
+						}
+					});
+				}
+			}).catch((err) => {
+				res.status(500).send({
+					error: "Failed to check if email is available"
+				});
 			});
-		}
-		// Create account
-		else{
-			// res.sendStatus(200);
-			db.collection("users").insertOne(req.body, function(err, result) {
-				if (err) throw err;
-				// res.status(200).send({message:"User inserted"});
-				res.status(200).send('manage');
-			});
-	
 		}
 	}
+
 });
+app.post('/api/user/login', ((req, res) => {
 
-
-// NEW REGISTER / LOGIN
-//==========================================================================
-app.post('/api/user/test', (req, res) => {
-
-	// console.log(req.body);
-
-	var login = req.body.login == "Login"; // login variable will either be 'Login' or 'Sign up'
-
-	var email = req.body.email;
-	var password = req.body.password;
-
+	let email = req.body['email'];
+	let password = req.body['password'];
 
 	// Check if email is present
-	if(email == ""){
+	if(email === undefined){
 		res.status(400).send({
 			error: "Missing email"
 		});
 	}
 	// Check if password is present
-	else if(password == ""){
+	else if(password === undefined){
 		res.status(400).send({
 			error: "Missing password"
 		});
+	}else{
+		// Get hash from database
+		db.collection('users').findOne({email:email}, (err, database_result) => {
+			if(err){
+				res.status(500).send({
+					error: "Error talking to database"
+				});
+			}else{
+				if(database_result === null){
+					res.status(401).send({
+						error: "Invalid credentials"
+					});
+				}else{
+					bcrypt.compare(password, database_result['password'], (err, compare_result) => {
+						if(err){
+							res.status(500).send({
+								error: "Error comparing password hash"
+							});
+						}else if(compare_result){
+							// Login successful
+							req.session.regenerate((err_regen) => {
+								if(err_regen){
+									res.status(500).send({
+										error: "Error regenerating session"
+									});
+								}
+								req.session['userID'] = database_result['_id'];
+								res.sendStatus(200);
+							});
+						}else{
+							res.status(401).send({
+								error: "Invalid credentials"
+							});
+						}
+					});
+				}
+			}
+		});
 	}
 
-	if(login == false){		// REGISTER
-		// Check if password meets requirements (At least 12 characters)
-		if(password.length < 12){
-			res.status(400).send({
-				error: "Password is too short"
-			});
-		}
-		// Check if email is available
-		else if(db.collection("users").countDocuments({email:email}) > 0){
-			res.status(400).send({
-				error: "Email is not available"
-			});
-		}
-		// Create account
+}));
+app.get('/api/user/logout', (req, res) => {
+
+	req.session.destroy((err) => {
+		if(err) res.status(500).send({
+			error: "Failed to destroy session"
+		});
 		else{
-			var user = Object.create(null);
-			user.email = email;
-			user.password = password;
-
-			// console.log(user);
-			db.collection("users").insertOne(user, function(err, result) {
-				if (err) throw err;
-				res.status(200).send({message:"User inserted"});
-				// res.status(200).send('/manage'); // this doesn't work
-			});
-	
+			res.sendStatus(200);
 		}
-	} else { // LOGIN - unfinished
-		if(db.collection("users").countDocuments({email:email}) == 0){
-			res.status(400).send({
-				error: "Username or password is incorrect"
-			});
-		}
-	}
+	});
 
 });
-//==========================================================================
-
-
-
 
 // create new event
 app.post('/api/events/new', (req, res) => {
@@ -161,7 +227,7 @@ app.post('/api/events/new', (req, res) => {
 
   }
 
-  
+
 });
 
 // edit event
@@ -216,7 +282,19 @@ app.get('/api/events/hosting', (req, res) => {
 
 // get current user's invites
 app.get('/api/events/invited', (req, res) => {
-	
+
+});
+
+// Example route that checks if a user is logged in and if they are, returns their info, otherwise returns 401 with an error message
+app.get('/s3cr3t', (req, res) => {
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			res.send(user);
+		}
+	});
+
 });
 
 // MongoDB

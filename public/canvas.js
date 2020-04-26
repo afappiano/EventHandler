@@ -2,6 +2,16 @@ function startBuild() {
     myArea.start();
     $('#upload_btn').hide();
     $('#create_btn').hide();
+    $('.map_container').append('<button onclick="changePiece(0)">Square</button>' +
+    '<button onclick="changePiece(1)">Rectangle</button>' +
+    '<button onclick="changePiece(2)">Circle</button>' +
+    '<br><button onclick="rotate()">Rotate</button>' + 
+    '<button onclick="rescale(1)">Scale Up</button>' +
+    '<button onclick="rescale(0)">Scale Down</button>' +
+    '<button onclick="wipe()">Wipe</button>' +
+    '<br><input width="15" height="10" class="labelText"></input>' +
+    '<button onclick="addLabel()">Add Label</button>' +
+    '<select id="labels" size="5"></select>')
 }
 
 function changePiece(code) {
@@ -20,15 +30,15 @@ function makeLabel(label) {
 var labels = [];
 function addLabel() {
     var label = $(".labelText").val();
-    labels.push(label);
-    $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "'>" + label + "</option>");
+    if (label !== "") {
+        labels.push(label);
+        $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "'>" + label + "</option>");
+    }
 }
 
 function rectangle(width, height, color, x, y) {
     this.width = width;
-    this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;    
+    this.height = height; 
     this.x = x;
     this.y = y;    
     this.update = function() {
@@ -129,8 +139,8 @@ pieces.push(new text("black", 0, 0)); // text
 var myArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 300;
+        this.canvas.width = $('div.map').width();
+        this.canvas.height = $('div.map').height();
         this.canvas.style.cursor = "none";  // hide the original cursor
         this.context = this.canvas.getContext("2d");
         document.getElementsByClassName("map")[0].append(this.canvas);

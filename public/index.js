@@ -103,7 +103,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     desc: "",
     time: "",
     loc: "",
-    attendees: []
+    attendees: [],
+    map: {
+      components: [],
+      labels: []
+    }
   },
 
   $scope.editing = false;
@@ -182,6 +186,12 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   //save new event
   $scope.createEvent = function () {
     console.log($scope.event);
+    // var parameters = $.param($scope.event);
+
+    // JSON.parse(parameters);
+    $scope.event.map.components = components;
+    $scope.event.map.labels = labels;
+
 
     $http({
       method: "POST",

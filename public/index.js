@@ -212,7 +212,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       }
       labels = $scope.event.map.labels;
       for (var i = 0; i < $scope.event.map.labels.length; i++) {
-        $scope("#labels").append("<option onclick='makeLabel(\"" + $scope.event.map.labels[i] + "\")' value='" + $scope.event.map.labels[i] + "'>" + $scope.event.map.labels[i] + "</option>")
+        $("#labels").append("<option onclick='makeLabel(\"" + $scope.event.map.labels[i] + "\")' value='" + $scope.event.map.labels[i] + "' id='" + $scope.event.map.labels[i] + "'>" + $scope.event.map.labels[i] + "</option>")
       }
     }
   },

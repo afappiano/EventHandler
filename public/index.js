@@ -61,16 +61,13 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     //save new event
     $scope.signup = function (email, password) {
       //hash password
-
       var parameters = {
-
+        email: email,
+        password: password
       }
       // var parameters = $.param($scope.event);
-      
-      console.log(parameters);
-  
+      // console.log(parameters);
       // JSON.parse(parameters);
-  
       $http({
         method: "POST",
         header: {
@@ -85,9 +82,32 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       function(res) {
         console.log('error', res);
       });
-  
-  
+    },
+    $scope.login = function (email, password) {
+      //hash password
+      var parameters = {
+        email: email,
+        password: password
+      }
+      // var parameters = $.param($scope.event);
+      // console.log(parameters);
+      // JSON.parse(parameters);
+      $http({
+        method: "POST",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/login',
+        data: parameters
+      }).then(function(res) {
+        console.log(res);
+        console.log("Logging in");
+      },
+      function(res) {
+        console.log('error', res);
+      });
     }
+
   
     
 }])

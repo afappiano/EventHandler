@@ -198,6 +198,10 @@ app.post('/api/events/new', (req, res) => {
 	// console.log(req);
 
   var event = req.body;
+  var currentuser = '';
+
+	
+	// console.log(currentuser);
 
 	if(event.name == ""){
 		res.status(400).send({
@@ -220,10 +224,29 @@ app.post('/api/events/new', (req, res) => {
 		});
   }
   else {
-    db.collection("events").insertOne(event, function(err, result) {
-      if (err) throw err;
-			res.status(200).send({message:"Event inserted"});
-    });
+
+  	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			console.log(currentuser);
+
+			var new_event = {
+			  user: currentuser,
+		      name: event.name,
+		      desc: event.desc,
+		      time: event.time,
+		      loc: event.loc,
+		      attendees: event.attendees
+			};
+		    db.collection("events").insertOne(new_event, function(err, result) {
+		      if (err) throw err;
+					res.status(200).send({message:"Event inserted"});
+		    });
+		}
+	});
+  	
 
   }
 
@@ -233,6 +256,10 @@ app.post('/api/events/new', (req, res) => {
 // edit event
 app.post('/api/events/edit', (req, res) => {
 	var event = req.body;
+	var currentuser = '';
+
+	
+
 	if(event.name == ""){
 		res.status(400).send({
 			error: "Missing name"
@@ -255,29 +282,54 @@ app.post('/api/events/edit', (req, res) => {
   }
   else {
 	var searchid = { _id: ObjectID(event._id) }
-	var changes = { $set: {
-      name: event.name,
-      desc: event.desc,
-      time: event.time,
-      loc: event.loc,
-      attendees: event.attendees
-	}}
-    db.collection("events").updateOne(searchid, changes, function(err, result) {
-      	if (err) throw err;
-			res.status(200).send({message:"Event updated"});
-    });
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			console.log(user);
+		}
+
+		var changes = { $set: {
+		  user: currentuser,
+	      name: event.name,
+	      desc: event.desc,
+	      time: event.time,
+	      loc: event.loc,
+	      attendees: event.attendees
+		}};
+	    db.collection("events").updateOne(searchid, changes, function(err, result) {
+	      	if (err) throw err;
+				res.status(200).send({message:"Event updated"});
+	    });
+	});
+	
   }
 });
 
 // get current user's events
 app.get('/api/events/hosting', (req, res) => {
-	db.collection("events").find({ /*"user" : currentuser*/ }).sort({"time":-1}).toArray(function(err, result) {
-        if (err) throw err;
-        else {
-          // console.log(result);
-          res.status(200).send(result);
-        }
+
+	var currentuser = '';
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			console.log("??????" + currentuser);
+			db.collection("events").find({ "user" : currentuser }).sort({"time":-1}).toArray(function(err, result) {
+		        if (err) throw err;
+		        else {
+		          // console.log(result);
+		          res.status(200).send(result);
+		        }
+			});
+		}
 	});
+
+	
 });
 
 // get current user's invites

@@ -145,10 +145,27 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   $scope.populate = function() {
+    components = [];
+    labels = [];
     if ($scope.editEvent.event == null) $scope.event = $scope.empty;
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
+      startBuild();
+      for (var i = 0; i < $scope.event.map.components.length; i++) {
+        var current = $scope.event.map.components[i];
+        if ($scope.event.map.components[i].type === "Rectangle") {
+          components.push(new rectangle(current.width, current.height, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Circle") {
+          components.push(new circle(current.radius, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Text") {
+          components.push(new text(current.color, current.x, current.y, current.label));
+        }
+      }
+      labels = $scope.event.map.labels;
+      for (var i = 0; i < $scope.event.map.labels.length; i++) {
+        $scope("#labels").append("<option onclick='makeLabel(\"" + $scope.event.map.labels[i] + "\")' value='" + $scope.event.map.labels[i] + "'>" + $scope.event.map.labels[i] + "</option>")
+      }
     }
   },
   
@@ -193,6 +210,8 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   $scope.saveEvent = function () {
     //
     // var parameters = $.param($scope.event);
+    $scope.event.map.components = components;
+    $scope.event.map.labels = labels;
 
     $http({
       method: "POST",

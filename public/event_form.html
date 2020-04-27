@@ -8,34 +8,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="resources/css/login.css"/>
     <link rel="stylesheet" href="resources/css/event.css"/>
+    <link rel="stylesheet" href="resources/css/login.css"/>
 
 
 
     <title>Create Event</title>
   </head>
   <body>
-  <div ng-controller="CreateCtrl" ng-init="populate()">
+  <div ng-controller="CreateCtrl" ng-init="populate()" id="main">
 
     <!-- <form> -->
 
       <div class="left">
-        <div class="map_container">
+
+        <div class="form-group">
+            <!-- <label for="eventName">Event Name</label> -->
+          <input type="text" class="form-control" id="eventName" ng-model="event.name" ng-required="required" placeholder="Event Name">
+        </div>
+
+        <div class="map_container form-group">
           <h2>Event Map/Floorplan</h2>
-          <div class="map form-group">
-            <div class="btn" id="upload_btn">Upload</div>
-            <div class="btn" id="create_btn" onclick="startBuild()">Create</div>
+          <div class="map">
+            <div class="btn btn-primary" id="upload_btn">Upload</div>
+            <div class="btn btn-secondary" id="create_btn" onclick="startBuild()">Create</div>
             <!--ng-model="event.map"-->
           </div>
         </div>
 
         <div class="desc_container">
           <!-- <h2>Details</h2> -->
-          <div class="form-group">
-            <label for="eventName">Event Name</label>
-            <input type="text" class="form-control" id="eventName" ng-model="event.name" ng-required="required">
-          </div>
+          
           <div class="form-group">
             <label for="eventDesc">Description</label>
             <textarea type="text" class="form-control" id="eventDesc" ng-model="event.desc" ng-required="required"></textarea>
@@ -56,32 +59,32 @@
       <div class="guests_container">
         <h2>Attendees</h2>
         <ol class="guests list-group">
-          <li class="list-group-item" ng-repeat="attendee in event.attendees"  >
+          <li class="list-group-item attendee_item" ng-repeat="attendee in event.attendees"  >
             <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
               <div class="mb-1 attendeeEmail">{{attendee.email}}</div>
               <small class="text-muted attendeeStatus">{{attendee.status}}</small>
             </div>
             <form ng-show="editing" ng-submit="editing = false">
-              <input type="text" placeholder="Email" ng-model="attendee.email">
-              <button class="btn" type="submit">Save</button>
-              <button class="btn" type="button" ng-click="removeAttendee(attendee)">Delete</button>
+              <input type="text" class="form-control invite_input" placeholder="Email" ng-model="attendee.email">
+              <button class="btn btn-primary" type="submit">Save</button>
+              <button class="btn btn-secondary" type="button" ng-click="removeAttendee(attendee)">Delete</button>
             </form>
 
           </li>
         </ol>
         <form ng-show="visible" ng-submit="addAttendee()">
           <!-- <label for="attendeeEmail">Email</label> -->
-          <input type="email" id="attendeeEmail" placeholder="Email" ng-model="newEmail" ng-required="required">
-          <button class="btn" id="invite_btn" type="submit">Invite</button>
+          <input type="email" class="form-control invite_input" id="attendeeEmail" placeholder="Email" ng-model="newEmail" ng-required="required">
+          <button class="btn btn-primary" id="invite_btn" type="submit">Invite</button>
         </form>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" ng-click="visible = !visible">Add Attendee</button>
+        <button class="btn btn-secondary" type="button" ng-click="visible = !visible">Add Attendee</button>
 
 
         
       </div>
       <div class="submit_container">
-        <button class="btn btn-outline-success my-2 my-sm-0" name="new" type="submit" ng-click="createEvent()" ng-hide="editEvent.event != null">Create Event</button>
-        <button class="btn btn-outline-success my-2 my-sm-0" name="update" type="submit" ng-click="saveEvent()" ng-hide="editEvent.event == null">Save Changes</button>
+        <button class="btn btn-primary" name="new" type="submit" ng-click="createEvent()" ng-hide="editEvent.event != null">Create Event</button>
+        <button class="btn btn-primary" name="update" type="submit" ng-click="saveEvent()" ng-hide="editEvent.event == null">Save Changes</button>
       </div>
     <!-- </form> -->
 

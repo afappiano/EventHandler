@@ -1,7 +1,6 @@
-
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: white;
+  /*background: white;*/
 }
 h1 {
   text-align: center; 
@@ -80,10 +79,112 @@ img {
 
 #loginForm {
   text-align: left;
-  max-width: 500px;
+  max-width: 375px;
+  background-color: #1e2833;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 
+
+
+
+
+#navbar{
+  background-color: #1e2833;
+}
+
+body{
+  background-color: #203651;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.illustration {
+  text-align: center;
+  padding: 15px 0 20px;
+  font-size: 100px;
+  color: #2980ef;
+}
+
+
+.form-control, .form-control:focus{
+  background: none;
+  border: none;
+  border-bottom: 1px solid #434a52;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  color: white;
+}
+
+.btn-primary {
+  background: #0E51A7;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  /*margin-top: 26px;*/
+  text-shadow: none;
+  outline: none;
+}
+
+.btn-secondary {
+  background: #0A3E81;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  /*margin-top: 26px;*/
+  text-shadow: none;
+  outline: none;
+}
+
+.btn:hover{
+  background-color: #2980ef;
+  transition: 0.6s;
+}
+
+@-webkit-keyframes autofill {
+    0%,100% {
+        color: white;
+        background: transparent;
+        font-size: inherit;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+/*.ion-ios-locked-outline:before {
+    content: "\f457";
+}
+
+.ion-ios-locked-outline:before{
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+*/
+
+
+.blue{
+  color: #0A3E81;
+}
 
 @media screen and  (max-width: 768px) {
   div .card {

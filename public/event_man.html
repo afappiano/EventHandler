@@ -70,6 +70,7 @@
           </div> -->
           <div class="tab-pane fade" id="invited-events" role="tabpanel" aria-labelledby="invited-events-tab" ng-init="getInvites()">
             <h2>Invitations</h2>
+            <a class="btn" ng-repeat="event in invitedEvents" ng-click="editRedirect(event)" href="/attending">{{event.name}}</a>
             <!-- <div class="pending" ng-switch on="isAccepted(0)">
               <div class="btn">Event 1</div>
               <a href="register" ng-switch-when="0">

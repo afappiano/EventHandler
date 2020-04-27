@@ -230,7 +230,7 @@ app.post('/api/events/new', (req, res) => {
 		if(user){
 			// res.send(user);
 			currentuser = user['email'];
-			console.log(currentuser);
+			// console.log(currentuser);
 
 			var new_event = {
 			  user: currentuser,
@@ -292,10 +292,10 @@ app.post('/api/events/edit', (req, res) => {
 		if(user){
 			// res.send(user);
 			currentuser = user['email'];
-			console.log(user);
+			// console.log(user);
 		}
 
-		var changes = { $set: {
+		var changes = {
 		  user: currentuser,
 	      name: event.name,
 	      desc: event.desc,
@@ -306,7 +306,7 @@ app.post('/api/events/edit', (req, res) => {
 			components: event.map.components,
 			labels: event.map.labels
 		  }
-		}};
+		};
 	    db.collection("events").updateOne(searchid, changes, function(err, result) {
 	      	if (err) throw err;
 				res.status(200).send({message:"Event updated"});
@@ -326,7 +326,7 @@ app.get('/api/events/hosting', (req, res) => {
 		if(user){
 			// res.send(user);
 			currentuser = user['email'];
-			console.log("??????" + currentuser);
+			// console.log("??????" + currentuser);
 			db.collection("events").find({ "user" : currentuser }).sort({"time":-1}).toArray(function(err, result) {
 		        if (err) throw err;
 		        else {
@@ -342,7 +342,23 @@ app.get('/api/events/hosting', (req, res) => {
 
 // get current user's invites
 app.get('/api/events/invited', (req, res) => {
+	var currentuser = '';
 
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			// console.log("??????" + currentuser);
+			db.collection("events").find({ "attendees" : { $elemMatch: { "email" : currentuser, "status" : "Pending"} } }).sort({"time":-1}).toArray(function(err, result) {
+		        if (err) throw err;
+		        else {
+		          // console.log(result);
+		          res.status(200).send(result);
+		        }
+			});
+		}
+	});
 });
 
 // Example route that checks if a user is logged in and if they are, returns their info, otherwise returns 401 with an error message

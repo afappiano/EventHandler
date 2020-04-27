@@ -18,24 +18,24 @@
     <title>Event Handler</title>
   </head>
   <body ng-controller="MainCtrl">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" ng-init="loginStatus()">
-      <a href="/"><div class="navbar-brand">Event Handler</div></a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <a href="manage"><div class="navbar-brand">Event Handler</div></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item" ng-click="newEvent()" ng-show="eventBus.logged==true">
+          <li class="nav-item" ng-click="newEvent()" ng-hide="logged!=true">
             <a href="create">New Event</a><br/>
           </li>
-          <li class="nav-item" ng-show="eventBus.logged==true">
+          <li class="nav-item" ng-hide="logged!=true">
             <a href="manage">Manage Events</a><br/>
           </li>
-          <li class="nav-item" ng-click="logout()" ng-show="eventBus.logged==true">
-            <a href="login">Logout</a><br/>
+          <li class="nav-item" ng-click="logout()" ng-hide="logged!=true">
+            <a href="/">Logout</a><br/>
           </li>
-          <li class="nav-item" ng-show="eventBus.logged==false || eventBus.logged==null || eventBus.logged==undefined">
-            <a href="login">Login</a><br/>
+          <li class="nav-item" ng-hide="logged==true">
+            <a href="/">Login</a><br/>
           </li>
         </ul>
       </div>

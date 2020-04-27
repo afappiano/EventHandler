@@ -44,33 +44,61 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
     $locationProvider.html5Mode(true);
 }])
-.controller('MainCtrl', ['$route', '$routeParams', '$location', '$scope', 'eventBus',
-  function MainCtrl($route, $routeParams, $location, $scope, eventBus) {
+.controller('MainCtrl', ['$route', '$routeParams', '$location', '$scope', 'editEvent','$http',
+  function MainCtrl($route, $routeParams, $location, $scope, editEvent, $http) {
     this.$route = $route;
     this.$location = $location;
     this.$routeParams = $routeParams;
-    $scope.eventBus = eventBus;
+    $scope.editEvent = editEvent;
 
     $scope.newEvent = function () {
-      $scope.eventBus.event = null;
+      $scope.editEvent.event = null;
     },
-    $scope.loginStatus = function () {
-      console.log("loginStatus");
-      console.log($scope.eventBus.logged);
-      if ($scope.eventBus.logged == true) {
-        $location.path('/manage');
-      } else if ($scope.eventBus.logged == null || $scope.eventBus.logged == undefined) {
-        $scope.eventBus.logged = false;
-      }
-    },
+
     $scope.logout = function () {
-      $scope.eventBus.logged = false;
-    }
+      console.log("logout");
+      $http({
+        method: "DELETE",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/logout'
+      }).then(function(res) {
+        console.log(res);
+        // $scope.loginStatus();
+        $location.path('/');
+      },
+      function(res) {
+        console.log('error', res);
+      });
+    },
+    $scope.$on('$locationChangeSuccess', function () {
+      console.log('$locationChangeSuccess');
+      // $scope.loginStatus();
+      $http({
+        method: "GET",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/isLoggedIn'
+      }).then(function(res) {
+        // console.log(res);
+        $scope.logged = res.data.isLoggedIn;
+        console.log($scope.logged);
+        if ($scope.logged == false) {
+          $location.path('/');
+        }
+      },
+      function(res) {
+        console.log('error', res);
+      });
+    });
+
 }])
-.controller('LoginCtrl', ['$scope','$http','$routeParams','eventBus', function LoginCtrl($scope, $http, $routeParams, eventBus) {
+.controller('LoginCtrl', ['$scope','$http','$routeParams','editEvent', '$location', function LoginCtrl($scope, $http, $routeParams, editEvent, $location) {
   this.name = 'LoginCtrl';
   this.params = $routeParams;
-  $scope.eventBus = eventBus;
+  $scope.editEvent = editEvent;
 
     //save new event
     $scope.signup = function (email, password) {
@@ -123,24 +151,26 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
         current_user = email;           // keep track of current user
         console.log(current_user);
-        $scope.eventBus.logged = true;
-        console.log($scope.eventBus.logged);
+        $scope.logged = true;
+        console.log($scope.logged);
+        
+        $location.path('/manage');
       },
       function(res) {
         console.log('error', res);
-        $scope.eventBus.logged = false;
-        console.log($scope.eventBus.logged);
+        $scope.logged = false;
+        console.log($scope.logged);
       });
     }
 
   
     
 }])
-.controller('CreateCtrl', ['$scope','$http','$routeParams', 'eventBus',  function CreateCtrl($scope, $http, $routeParams, eventBus) {
+.controller('CreateCtrl', ['$scope','$http','$routeParams', 'editEvent', function CreateCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
   // $scope = $scope;
-  $scope.eventBus = eventBus;
+  $scope.editEvent = editEvent;
 
   $scope.empty = {
     // layout: ,
@@ -163,10 +193,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   $scope.populate = function() {
-    if ($scope.eventBus.event == null) $scope.event = $scope.empty;
+    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
     else {
-      $scope.event = $scope.eventBus.event;
-      $scope.event.time = new Date($scope.eventBus.event.time);
+      $scope.event = $scope.editEvent.event;
+      $scope.event.time = new Date($scope.editEvent.event.time);
     }
   },
   
@@ -194,7 +224,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   //populate page with event to be edited
-  // $scope.eventBus = function (ev) {
+  // $scope.editEvent = function (ev) {
   //   //choose event
     
   //   $scope.event = {
@@ -266,11 +296,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   this.name = 'RegCtrl';
   this.params = $routeParams;
 }])
-.controller('ManageCtrl', ['$scope','$http','$routeParams', 'eventBus',  function ManageCtrl($scope, $http, $routeParams, eventBus) {
+.controller('ManageCtrl', ['$scope','$http','$routeParams','editEvent', function ManageCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
   // $scope = $scope;
-  $scope.eventBus = eventBus;
+  $scope.editEvent = editEvent;
 
   $scope.isAccepted = function(num){
     // if (/*pending*/) return 0;
@@ -322,14 +352,13 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
   $scope.editRedirect = function(event) {
     console.log("Redirect...");
-    $scope.eventBus.event = event;
-    console.log($scope.eventBus.event);
+    $scope.editEvent.event = event;
+    console.log($scope.editEvent.event);
   }
 
 }])
-.service('eventBus', function () {
+.service('editEvent', function () {
   this.event = null;
-  this.logged = null;
 });
 
 

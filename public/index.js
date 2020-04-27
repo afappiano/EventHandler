@@ -1,5 +1,16 @@
 
 var current_user;
+var empty = {
+  name: "",
+  desc: "",
+  time: "",
+  loc: "",
+  attendees: [],
+  map: {
+    components: [],
+    labels: []
+  }
+};
 
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
@@ -73,7 +84,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       });
     },
     $scope.$on('$locationChangeSuccess', function () {
-      console.log('$locationChangeSuccess');
+      // console.log('$locationChangeSuccess');
       // $scope.loginStatus();
       $http({
         method: "GET",
@@ -84,7 +95,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       }).then(function(res) {
         // console.log(res);
         $scope.logged = res.data.isLoggedIn;
-        console.log($scope.logged);
+        // console.log($scope.logged);
         if ($scope.logged == false) {
           $location.path('/');
         }
@@ -172,19 +183,6 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   // $scope = $scope;
   $scope.editEvent = editEvent;
 
-  $scope.empty = {
-    // layout: ,
-    name: "",
-    desc: "",
-    time: "",
-    loc: "",
-    attendees: [],
-    map: {
-      components: [],
-      labels: []
-    }
-  },
-
   $scope.editing = false;
 
   $scope.sortguests = function(a, b) {
@@ -193,9 +191,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   $scope.populate = function() {
+    console.log("POPULATE");
     components = [];
     labels = [];
-    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    if ($scope.editEvent.event == null) $scope.event = empty;
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
@@ -239,20 +238,6 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     var index = $scope.event.attendees.indexOf(item);
     $scope.event.attendees.splice(index,1);
   },
-
-  //populate page with event to be edited
-  // $scope.editEvent = function (ev) {
-  //   //choose event
-    
-  //   $scope.event = {
-  //     // layout: ,
-  //     name: ev.name,
-  //     desc: ev.desc,
-  //     time: ev.time,
-  //     loc: ev.loc,
-  //     attendees: ev.attendees
-  //   }
-  // },
 
   //save edited event
   $scope.saveEvent = function () {
@@ -313,19 +298,6 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   // $scope = $scope;
   $scope.editEvent = editEvent;
 
-  $scope.empty = {
-    // layout: ,
-    name: "",
-    desc: "",
-    time: "",
-    loc: "",
-    attendees: [],
-    map: {
-      components: [],
-      labels: []
-    }
-  },
-
   $scope.editing = false;
 
   $scope.sortguests = function(a, b) {
@@ -334,7 +306,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   $scope.populate = function() {
-    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    console.log("POPULATE");
+    components = [];
+    if ($scope.editEvent.event == null) $scope.event = empty;
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
@@ -353,6 +327,13 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       console.log(components);
     }
   },
+
+  $scope.editRedirect = function(event) {
+    $scope.editEvent.event = empty;
+    console.log("Redirect...");
+    $scope.editEvent.event = event;
+    console.log($scope.editEvent.event);
+  }
   
   $scope.newEmail = "";
   $scope.visible = false;
@@ -360,28 +341,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   
 
 }])
-// .controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
-//   this.name = 'AttendCtrl';
-//   this.params = $routeParams;
-// }])
-.controller('RegCtrl', ['$routeParams', function RegCtrl($routeParams) {
+.controller('RegCtrl', ['$scope','$http','$routeParams', 'editEvent',  function CreateCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'RegCtrl';
   this.params = $routeParams;
   // $scope = $scope;
   $scope.editEvent = editEvent;
-
-  $scope.empty = {
-    // layout: ,
-    name: "",
-    desc: "",
-    time: "",
-    loc: "",
-    attendees: [],
-    map: {
-      components: [],
-      labels: []
-    }
-  },
 
   $scope.editing = false;
 
@@ -389,9 +353,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     if (a.email <= b.email) return -1;
     else return 1;
   },
-  myArea.start();
+
   $scope.populate = function() {
-    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    console.log("POPULATE");
+    components = [];
+    if ($scope.editEvent.event == null) $scope.event = empty;
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
@@ -405,8 +371,18 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
           components.push(new text(current.color, current.x, current.y, current.label));
         }
       }
+      myArea.start();
+      piece = 3;
+      console.log(components);
     }
   },
+
+  $scope.editRedirect = function(event) {
+    $scope.editEvent.event = empty;
+    console.log("Redirect...");
+    $scope.editEvent.event = event;
+    console.log($scope.editEvent.event);
+  }
   
   $scope.newEmail = "";
   $scope.visible = false;
@@ -436,9 +412,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       // data: $scope.event
     }).then(function(res) {
       // console.log(res);
-      console.log("Events found");
+      // console.log("Events found");
       $scope.yourEvents = res.data;
-      console.log($scope.yourEvents);
+      // console.log($scope.yourEvents);
     },
     function(res) {
       console.log('error', res);
@@ -456,9 +432,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       // data: $scope.event
     }).then(function(res) {
       // console.log(res);
-      console.log("Invites found");
+      // console.log("Invites found");
       $scope.invitedEvents = res.data;
-      console.log($scope.invitedEvents);
+      // console.log($scope.invitedEvents);
     },
     function(res) {
       console.log('error', res);
@@ -466,6 +442,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   },
 
   $scope.editRedirect = function(event) {
+    $scope.editEvent.event = empty;
     console.log("Redirect...");
     $scope.editEvent.event = event;
     console.log($scope.editEvent.event);
@@ -475,10 +452,3 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 .service('editEvent', function () {
   this.event = null;
 });
-
-
-
-// $(document).ready(function () {
-//   app.p
-
-// });

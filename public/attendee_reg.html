@@ -20,7 +20,7 @@
 
     <div class="left">
       <div class="desc_container">
-        <h2>REGISTRATION - {{event.name}}</h2>
+        <h2>Register for {{event.name}}</h2>
         <form>
           <div class="form-group">
             <label>Name</label>
@@ -37,22 +37,21 @@
           <div class="btn">Pick Seat</div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        
       </div>
     </div>
 
     <div class="guests_container">
-      <a class="btn" ng-click="editRedirect(event)" href="/attending">Back to Form</a>
-      <h2>Event Map/Floorplan</h2>
-      <button class="btn" id="create_btn" onClick="myArea.start()">Show Map</button>
-      <div class="map">
+      <div class="map_container">
+        <h2>Event Map/Floorplan</h2>
+        <!-- <button class="btn" id="create_btn" onClick="myArea.start()">Show Map</button> -->
+        <div class="map">
+        </div>
+        <a class="btn" ng-click="editRedirect(event)" href="/attending">Back to Form</a>
       </div>
-      
     </div>
-
-
   </div>
   
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" ></script>

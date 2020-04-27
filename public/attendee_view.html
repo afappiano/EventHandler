@@ -27,42 +27,45 @@
       </div>
 
       <div class="desc_container">
-        <h2 class="btn">Details</h2>
-        <h2 class="btn">Attendees</h2>
+        <!-- <p class="" id="eventDesc" ng-model="event.desc" disabled>{{event.name}}</p>
+        <p class="" id="eventTime" ng-model="event.time" disabled>{{event.time}}</p>
+        <p class="" id="eventLoc" ng-model="event.loc" disabled>{{event.loc}}</p> -->
+        <div class="form-group">
+          <label for="eventName">Event Name</label>
+          <input type="text" class="form-control" id="eventName" ng-model="event.name" disabled>
+        </div>
+        <div class="form-group">
+          <label for="eventDesc">Description</label>
+          <textarea type="text" class="form-control" id="eventDesc" ng-model="event.desc" disabled></textarea>
+        </div>
+        <div class="form-group">
+          <label for="eventTime">Time</label>
+          <input type="datetime-local" class="form-control" id="eventTime" ng-model="event.time" disabled>
+        </div>
+        <div class="form-group">
+          <label for="eventLoc">Location</label>
+          <textarea type="text" class="form-control" ng-model="event.loc" disabled></textarea>
+        </div>
         <a class="btn btn-lg" ng-click="editRedirect(event)" href="/register">REGISTER</a>
       </div>
     </div>
 
-    <div class="guests_container">
-      <!-- <h2>{{event name}}</h2>
-      <h2>{{attendee name}}</h2>
-      <h2>{{attendee/table num}}</h2>
- -->      <!-- <h2 class="btn">About</h2>
-      <h2 class="btn">{{category 1}}</h2> -->
+    <!-- <div class="guests_container"> -->
 
-
-      <!-- <div class="" id="desc_container"> -->
-        <p class="" id="eventDesc" ng-model="event.desc" ng-required="required">{{event.name}}</p>
-        <p class="" id="eventTime" ng-model="event.time" ng-required="required">{{event.time}}</p>
-        <p class="" id="eventLoc" ng-model="event.loc" ng-required="required">{{event.loc}}</p>
-      </div>
       <div class="guests_container">
         <h2>Attendees</h2>
         <ol class="guests list-group">
           <li class="list-group-item" ng-repeat="attendee in event.attendees"  >
-            <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
+            <div class="d-flex justify-content-between">
               <div class="mb-1 attendeeEmail">{{attendee.email}}</div>
               <small class="text-muted attendeeStatus">{{attendee.status}}</small>
             </div>
-            <form ng-show="editing" ng-submit="editing = false">
-              <input type="text" placeholder="Email" ng-model="attendee.email">
-            </form>
 
           </li>
         </ol>
         
-     <!--  </div> -->
-    </div>
+      </div>
+    <!-- </div> -->
 
 
   </div>

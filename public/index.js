@@ -1,5 +1,5 @@
 
-
+var current_user;
 
 
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
@@ -78,6 +78,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       }).then(function(res) {
         console.log(res);
         console.log("User created");
+
+        current_user = email;           // keep track of current user
+        console.log(current_user);
+        // res.send('/manage');
       },
       function(res) {
         console.log('error', res);
@@ -102,6 +106,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       }).then(function(res) {
         console.log(res);
         console.log("Logging in");
+
+        current_user = email;           // keep track of current user
+        console.log(current_user);
       },
       function(res) {
         console.log('error', res);

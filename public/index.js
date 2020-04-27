@@ -338,6 +338,19 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
+      for (var i = 0; i < $scope.event.map.components.length; i++) {
+        var current = $scope.event.map.components[i];
+        if ($scope.event.map.components[i].type === "Rectangle") {
+          components.push(new rectangle(current.width, current.height, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Circle") {
+          components.push(new circle(current.radius, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Text") {
+          components.push(new text(current.color, current.x, current.y, current.label));
+        }
+      }
+      myArea.start();
+      piece = 3;
+      console.log(components);
     }
   },
   
@@ -376,12 +389,22 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     if (a.email <= b.email) return -1;
     else return 1;
   },
-
+  myArea.start();
   $scope.populate = function() {
     if ($scope.editEvent.event == null) $scope.event = $scope.empty;
     else {
       $scope.event = $scope.editEvent.event;
       $scope.event.time = new Date($scope.editEvent.event.time);
+      for (var i = 0; i < $scope.event.map.components.length; i++) {
+        var current = $scope.event.map.components[i];
+        if ($scope.event.map.components[i].type === "Rectangle") {
+          components.push(new rectangle(current.width, current.height, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Circle") {
+          components.push(new circle(current.radius, current.color, current.x, current.y));
+        } else if ($scope.event.map.components[i].type === "Text") {
+          components.push(new text(current.color, current.x, current.y, current.label));
+        }
+      }
     }
   },
   

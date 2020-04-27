@@ -293,9 +293,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       // data: $scope.event
     }).then(function(res) {
       // console.log(res);
-      console.log("Events found");
-      $scope.yourEvents = res.data;
-      console.log($scope.yourEvents);
+      console.log("Invites found");
+      $scope.invitedEvents = res.data;
+      console.log($scope.invitedEvents);
     },
     function(res) {
       console.log('error', res);

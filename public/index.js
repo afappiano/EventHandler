@@ -44,19 +44,61 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
     $locationProvider.html5Mode(true);
 }])
-.controller('MainCtrl', ['$route', '$routeParams', '$location', '$scope', 'editEvent',
-  function MainCtrl($route, $routeParams, $location, $scope, editEvent) {
+.controller('MainCtrl', ['$route', '$routeParams', '$location', '$scope', 'editEvent','$http',
+  function MainCtrl($route, $routeParams, $location, $scope, editEvent, $http) {
     this.$route = $route;
     this.$location = $location;
     this.$routeParams = $routeParams;
     $scope.editEvent = editEvent;
+
     $scope.newEvent = function () {
       $scope.editEvent.event = null;
-    }
+    },
+
+    $scope.logout = function () {
+      console.log("logout");
+      $http({
+        method: "DELETE",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/logout'
+      }).then(function(res) {
+        console.log(res);
+        // $scope.loginStatus();
+        $location.path('/');
+      },
+      function(res) {
+        console.log('error', res);
+      });
+    },
+    $scope.$on('$locationChangeSuccess', function () {
+      console.log('$locationChangeSuccess');
+      // $scope.loginStatus();
+      $http({
+        method: "GET",
+        header: {
+          'Content-Type': "application/json",
+        },
+        url: '/api/user/isLoggedIn'
+      }).then(function(res) {
+        // console.log(res);
+        $scope.logged = res.data.isLoggedIn;
+        console.log($scope.logged);
+        if ($scope.logged == false) {
+          $location.path('/');
+        }
+      },
+      function(res) {
+        console.log('error', res);
+      });
+    });
+
 }])
-.controller('LoginCtrl', ['$scope','$http','$routeParams', function LoginCtrl($scope, $http, $routeParams) {
+.controller('LoginCtrl', ['$scope','$http','$routeParams','editEvent', '$location', function LoginCtrl($scope, $http, $routeParams, editEvent, $location) {
   this.name = 'LoginCtrl';
   this.params = $routeParams;
+  $scope.editEvent = editEvent;
 
     //save new event
     $scope.signup = function (email, password) {
@@ -109,16 +151,22 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
 
         current_user = email;           // keep track of current user
         console.log(current_user);
+        $scope.logged = true;
+        console.log($scope.logged);
+        
+        $location.path('/manage');
       },
       function(res) {
         console.log('error', res);
+        $scope.logged = false;
+        console.log($scope.logged);
       });
     }
 
   
     
 }])
-.controller('CreateCtrl', ['$scope','$http','$routeParams', 'editEvent',  function CreateCtrl($scope, $http, $routeParams, editEvent) {
+.controller('CreateCtrl', ['$scope','$http','$routeParams', 'editEvent', function CreateCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'CreateCtrl';
   this.params = $routeParams;
   // $scope = $scope;
@@ -340,7 +388,7 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   $scope.newEmail = "";
   $scope.visible = false;
 }])
-.controller('ManageCtrl', ['$scope','$http','$routeParams', 'editEvent',  function ManageCtrl($scope, $http, $routeParams, editEvent) {
+.controller('ManageCtrl', ['$scope','$http','$routeParams','editEvent', function ManageCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'ManageCtrl';
   this.params = $routeParams;
   // $scope = $scope;

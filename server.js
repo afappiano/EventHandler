@@ -180,17 +180,29 @@ app.post('/api/user/login', ((req, res) => {
 	}
 
 }));
-app.get('/api/user/logout', (req, res) => {
-
-	req.session.destroy((err) => {
-		if(err) res.status(500).send({
-			error: "Failed to destroy session"
+app.delete('/api/user/logout', (req, res) => {
+	if (req.isLoggedIn()) {
+		// console.log("Logging out");
+		req.session.destroy((err) => {
+			// delete req.session.user;
+			// req.session.authenticated = false;
+			if(err) res.status(500).send({
+				error: "Failed to destroy session"
+			});
+			else{
+				res.sendStatus(200);
+			}
 		});
-		else{
-			res.sendStatus(200);
-		}
-	});
+	} else {
+		// console.log("Already logged out");
+		res.sendStatus(200);
+	}
 
+});
+app.get('/api/user/isLoggedIn', (req, res) => {
+	// console.log("isLoggedIn");
+	// console.log(req.isLoggedIn());
+	res.status(200).send({ isLoggedIn: req.isLoggedIn() });
 });
 
 // create new event

@@ -307,7 +307,7 @@ app.post('/api/events/edit', (req, res) => {
 			// console.log(user);
 		}
 
-		var changes = {
+		var changes = { $set : {
 		  user: currentuser,
 	      name: event.name,
 	      desc: event.desc,
@@ -318,7 +318,7 @@ app.post('/api/events/edit', (req, res) => {
 			components: event.map.components,
 			labels: event.map.labels
 		  }
-		};
+		}};
 	    db.collection("events").updateOne(searchid, changes, function(err, result) {
 	      	if (err) throw err;
 				res.status(200).send({message:"Event updated"});

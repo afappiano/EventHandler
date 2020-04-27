@@ -8,6 +8,7 @@ function startBuild() {
     '<br><button onclick="rotate()">Rotate</button>' + 
     '<button onclick="rescale(1)">Scale Up</button>' +
     '<button onclick="rescale(0)">Scale Down</button>' +
+    '<button onclick="undo()">Undo</button>' +
     '<button onclick="wipe()">Wipe</button>' +
     '<br><input width="15" height="10" class="labelText"></input>' +
     '<button onclick="addLabel()">Add Label</button>' +
@@ -32,7 +33,16 @@ function addLabel() {
     var label = $(".labelText").val();
     if (label !== "") {
         labels.push(label);
-        $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "'>" + label + "</option>");
+        $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "' id='" + label + "'>" + label + "</option>");
+    }
+}
+
+function undo() {
+    var c = components.pop();
+    if (c.type === "Text") {
+        labels.pop();
+        $('#'+c.label).remove();
+
     }
 }
 

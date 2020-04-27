@@ -160,7 +160,7 @@ var myArea = {
         document.getElementsByClassName("map")[0].append(this.canvas);
         this.interval = setInterval(updateArea, 20);
         document.getElementsByTagName("canvas")[0].classList.add("can");
-        document.addEventListener('mousemove', function (e) {
+        document.getElementsByTagName("canvas")[0].addEventListener('mousemove', function (e) {
             myArea.x = Math.ceil(e.pageX/10)*10 - 10 - $(".can").offset().left;
             myArea.y = Math.ceil(e.pageY/10)*10 - 10 - $(".can").offset().top;
         })

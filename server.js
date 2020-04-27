@@ -238,7 +238,11 @@ app.post('/api/events/new', (req, res) => {
 		      desc: event.desc,
 		      time: event.time,
 		      loc: event.loc,
-		      attendees: event.attendees
+			  attendees: event.attendees,
+			  map: {
+				  components: event.map.components,
+				  labels: event.map.labels
+			  }
 			};
 		    db.collection("events").insertOne(new_event, function(err, result) {
 		      if (err) throw err;
@@ -297,7 +301,11 @@ app.post('/api/events/edit', (req, res) => {
 	      desc: event.desc,
 	      time: event.time,
 	      loc: event.loc,
-	      attendees: event.attendees
+		  attendees: event.attendees,
+		  map: {
+			components: event.map.components,
+			labels: event.map.labels
+		  }
 		};
 	    db.collection("events").updateOne(searchid, changes, function(err, result) {
 	      	if (err) throw err;

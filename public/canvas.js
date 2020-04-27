@@ -37,10 +37,12 @@ function addLabel() {
 }
 
 function rectangle(width, height, color, x, y) {
+    this.type = "Rectangle";
     this.width = width;
     this.height = height; 
     this.x = x;
-    this.y = y;    
+    this.y = y;
+    this.color = color;
     this.update = function() {
         ctx = myArea.context;
         ctx.beginPath();
@@ -59,9 +61,11 @@ function rectangle(width, height, color, x, y) {
 }
 
 function circle(radius, color, x, y) {
+    this.type = "Circle";
     this.radius = radius;
     this.x = x;
     this.y = y;
+    this.color = color;
     this.update = function() {
         ctx = myArea.context;
         ctx.beginPath();
@@ -75,10 +79,11 @@ function circle(radius, color, x, y) {
     }
 }
 
-function text(color, x, y) {
+function text(color, x, y, label) {
+    this.type = "Text";
     this.x = x;
     this.y = y;
-    this.label = "";
+    this.label = label;
     this.color = color;
     this.size = scale;
     this.update = function() {
@@ -94,7 +99,6 @@ function text(color, x, y) {
 
 function updateArea() {
     myArea.clear();
-    
     if (myArea.x && myArea.y) {
         pieces[piece].x = myArea.x;
         pieces[piece].y = myArea.y;
@@ -133,7 +137,7 @@ var scale = 20;
 pieces.push(new rectangle(scale, scale, "white", 0, 0));   // square
 pieces.push(new rectangle(scale*2, scale, "white", 0, 0));   // rectangle
 pieces.push(new circle(scale/2, "white", 0, 0));  // circle
-pieces.push(new text("black", 0, 0)); // text
+pieces.push(new text("black", 0, 0, "")); // text
 
 
 var myArea = {

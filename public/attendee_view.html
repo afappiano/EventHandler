@@ -16,7 +16,7 @@
     <title>View Event</title>
   </head>
   <body>
-  <div ng-controller="AttendCtrl">
+  <div ng-controller="AttendCtrl" ng-init="populate()">
 
     <div class="left">
       <div class="map_container">
@@ -31,16 +31,39 @@
       <div class="desc_container">
         <h2 class="btn">Details</h2>
         <h2 class="btn">Attendees</h2>
-        <h2 class="btn btn-lg">REGISTER</h2>
+        <a class="btn btn-lg" ng-click="editRedirect(event)" href="/register">REGISTER</a>
       </div>
     </div>
 
     <div class="guests_container">
-      <h2>{{event name}}</h2>
+      <!-- <h2>{{event name}}</h2>
       <h2>{{attendee name}}</h2>
       <h2>{{attendee/table num}}</h2>
-      <!-- <h2 class="btn">About</h2>
+ -->      <!-- <h2 class="btn">About</h2>
       <h2 class="btn">{{category 1}}</h2> -->
+
+
+      <!-- <div class="" id="desc_container"> -->
+        <p class="" id="eventDesc" ng-model="event.desc" ng-required="required">{{event.name}}</p>
+        <p class="" id="eventTime" ng-model="event.time" ng-required="required">{{event.time}}</p>
+        <p class="" id="eventLoc" ng-model="event.loc" ng-required="required">{{event.loc}}</p>
+      </div>
+      <div class="guests_container">
+        <h2>Attendees</h2>
+        <ol class="guests list-group">
+          <li class="list-group-item" ng-repeat="attendee in event.attendees"  >
+            <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
+              <div class="mb-1 attendeeEmail">{{attendee.email}}</div>
+              <small class="text-muted attendeeStatus">{{attendee.status}}</small>
+            </div>
+            <form ng-show="editing" ng-submit="editing = false">
+              <input type="text" placeholder="Email" ng-model="attendee.email">
+            </form>
+
+          </li>
+        </ol>
+        
+     <!--  </div> -->
     </div>
 
 

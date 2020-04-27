@@ -16,11 +16,11 @@
     <title>Register Form</title>
   </head>
   <body>
-  <div ng-controller="RegCtrl">
+  <div ng-controller="RegCtrl" ng-init="populate()">
 
     <div class="left">
       <div class="desc_container">
-        <h2>REGISTRATION</h2>
+        <h2>REGISTRATION - {{event.name}}</h2>
         <form>
           <div class="form-group">
             <label>Name</label>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="guests_container">
-      <div class="btn">Back to Form</div>
+      <a class="btn" ng-click="editRedirect(event)" href="/attending">Back to Form</a>
       <h2>Event Map/Floorplan</h2>
       <a href="#">
         <div class="map">

@@ -240,13 +240,86 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
   
 
 }])
-.controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
+.controller('AttendCtrl', ['$scope','$http','$routeParams', 'editEvent',  function CreateCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'AttendCtrl';
   this.params = $routeParams;
+  // $scope = $scope;
+  $scope.editEvent = editEvent;
+
+  $scope.empty = {
+    // layout: ,
+    name: "",
+    desc: "",
+    time: "",
+    loc: "",
+    attendees: [],
+    map: {
+      components: [],
+      labels: []
+    }
+  },
+
+  $scope.editing = false;
+
+  $scope.sortguests = function(a, b) {
+    if (a.email <= b.email) return -1;
+    else return 1;
+  },
+
+  $scope.populate = function() {
+    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    else {
+      $scope.event = $scope.editEvent.event;
+      $scope.event.time = new Date($scope.editEvent.event.time);
+    }
+  },
+  
+  $scope.newEmail = "";
+  $scope.visible = false;
+
+  
+
 }])
+// .controller('AttendCtrl', ['$routeParams', function AttendCtrl($routeParams) {
+//   this.name = 'AttendCtrl';
+//   this.params = $routeParams;
+// }])
 .controller('RegCtrl', ['$routeParams', function RegCtrl($routeParams) {
   this.name = 'RegCtrl';
   this.params = $routeParams;
+  // $scope = $scope;
+  $scope.editEvent = editEvent;
+
+  $scope.empty = {
+    // layout: ,
+    name: "",
+    desc: "",
+    time: "",
+    loc: "",
+    attendees: [],
+    map: {
+      components: [],
+      labels: []
+    }
+  },
+
+  $scope.editing = false;
+
+  $scope.sortguests = function(a, b) {
+    if (a.email <= b.email) return -1;
+    else return 1;
+  },
+
+  $scope.populate = function() {
+    if ($scope.editEvent.event == null) $scope.event = $scope.empty;
+    else {
+      $scope.event = $scope.editEvent.event;
+      $scope.event.time = new Date($scope.editEvent.event.time);
+    }
+  },
+  
+  $scope.newEmail = "";
+  $scope.visible = false;
 }])
 .controller('ManageCtrl', ['$scope','$http','$routeParams', 'editEvent',  function ManageCtrl($scope, $http, $routeParams, editEvent) {
   this.name = 'ManageCtrl';
@@ -293,9 +366,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
       // data: $scope.event
     }).then(function(res) {
       // console.log(res);
-      console.log("Events found");
-      $scope.yourEvents = res.data;
-      console.log($scope.yourEvents);
+      console.log("Invites found");
+      $scope.invitedEvents = res.data;
+      console.log($scope.invitedEvents);
     },
     function(res) {
       console.log('error', res);

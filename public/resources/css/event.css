@@ -338,8 +338,12 @@ a:hover{
 .view_desc{
 	/*color: #9DC4F6;*/
 	color: black;
+	border: 0;
+	width: 500px;
 }
-
+/*.view_desc input{
+}
+*/
 .view_container{
 	margin-top: 3.5vh;
 }

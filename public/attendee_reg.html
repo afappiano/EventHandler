@@ -16,9 +16,24 @@
     <title>Register Form</title>
   </head>
   <body>
-  <div ng-controller="RegCtrl" ng-init="populate()">
+  <div ng-controller="RegCtrl" ng-init="populate()" id="main">
 
     <div class="left">
+      <div class="map_container">
+        <h4>{{event.name}}</h4>
+
+        <div class="view_container">
+          <h2>Event Map/Floorplan</h2>
+          <a href="#">
+            <div class="map">
+            </div>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- <div class="left">
       <div class="desc_container">
         <h2>REGISTRATION - {{event.name}}</h2>
         <form>
@@ -26,28 +41,38 @@
             <label>Name</label>
             <input type="text" class="form-control">
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label>About</label>
             <input type="text" class="form-control">
           </div>
           <div class="form-group">
             <label>Category 1</label>
             <input type="text" class="form-control">
-          </div> -->
+          </div>
           <div class="btn">Pick Seat</div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
-    </div>
+    </div> -->
 
-    <div class="guests_container">
-      <a class="btn" ng-click="editRedirect(event)" href="/attending">Back to Form</a>
-      <h2>Event Map/Floorplan</h2>
-      <a href="#">
-        <div class="map">
-          <div class="btn">Pick Seat</div>
+    <div class="r_container">
+      <h4 class="clear">{{event.name}}</h4>
+      <form>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control">
         </div>
-      </a>
+        <!-- <div class="form-group">
+          <label>About</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Category 1</label>
+          <input type="text" class="form-control">
+        </div> -->
+        <div class="btn">Pick Seat</div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
       
     </div>
 

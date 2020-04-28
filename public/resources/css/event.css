@@ -128,7 +128,8 @@ body{
 }
 
 h2, label{
-	font-size: 4vh;
+	font-size: 3.5vh;
+	color: white;
 }
 
 .navbar, h2, h3{
@@ -172,9 +173,9 @@ a:hover{
 	color: black;
 }
 
-.desc_container label {
+/*.desc_container label {
 	font-size: 1.1em;
-}
+}*/
 
 .map{
 	/* border: 1px solid blue; */
@@ -182,6 +183,7 @@ a:hover{
 	background-color: #9DC4F6;
 	border-radius: 5px;
 	padding: 40px;
+	margin-top: 2vh;
 }
 
 
@@ -196,6 +198,11 @@ a:hover{
 .left{
 	float: left;
 	padding-bottom: 40px;
+	/*border: 1px solid yellow;*/
+}
+
+.left_container{
+	padding: 40px;
 }
 
 .guests_container{
@@ -237,7 +244,8 @@ a:hover{
 
 
 #main{
-	padding: 5vw;
+	padding: 5vh 5vw;
+	border: 0;
 }
 
 #eventName{
@@ -285,6 +293,41 @@ a:hover{
 .attendee_item{
 	background-color: #9DC4F6;
 	margin-top: 5px;
+}
+
+.view_desc{
+	color: #9DC4F6;
+}
+
+.view_container{
+	margin-top: 3.5vh;
+}
+
+
+h4{
+	font-size: 5vh;
+	color: #2980ef;
+	margin-top: 2vh;
+}
+
+.r_container{
+	float: right;
+	clear: right;
+	width: 40vw;
+	/*height: 70vh;*/
+	/*margin-right: 5vw;*/
+	text-align: left;
+	 /*border: 1px solid yellow; */
+	display: block;
+	/*margin-top: 2vh;*/
+	/*padding: 40px;*/
+
+
+	/*background-color: #1e2833;*/
+	/*padding: 40px;*/
+	/*box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);*/
+	/*border-radius: 4px;*/
+	color: white;
 }
 
 @media screen and (max-width: 1024px) and (min-width: 0px) {

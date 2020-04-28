@@ -52,6 +52,7 @@ li a{
   width: 60vw;
 	/* height: 40vh; */
 	margin-top: 2vh;
+  border: 0;
 }
 
 .card {
@@ -104,6 +105,7 @@ body{
   height: 100vh;
   min-height: 100vh;
 }
+
 
 .illustration {
   text-align: center;
@@ -181,9 +183,13 @@ input:-webkit-autofill {
 }
 */
 
+.clear{
+  color: transparent;
+}
+
 
 .blue{
-  color: #0A3E81;
+  color: #9DC4F6;
 }
 
 @media screen and  (max-width: 768px) {

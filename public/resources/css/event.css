@@ -129,7 +129,8 @@ body{
 
 h2, label{
 	font-size: 3.5vh;
-	color: white;
+	/*color: white;*/
+	color: #87A8D3;
 }
 
 .navbar, h2, h3{
@@ -173,6 +174,31 @@ a:hover{
 	color: black;
 }
 
+.map_container button{
+	background-color: #B7CEEC;
+	color: white;
+	display: inline-block;
+	margin: 1vh 0.5vh 0vh 0.5vh;
+	border-radius: 2px;
+	border: 0px;
+}
+
+.map_container button:hover{
+	background-color: #E4EEFB;
+	color: #87A8D3;
+	transition: 0.3s;
+}
+.map_container select{
+	height: 3.5vh;
+	margin-top: -0.5vh;
+	vertical-align: middle;
+	border: 1px solid #9FBCE1;
+	border-radius: 2px;
+}
+.map_container input{
+	border: 1px solid #9FBCE1;
+	border-radius: 2px;
+}
 /*.desc_container label {
 	font-size: 1.1em;
 }*/
@@ -180,7 +206,8 @@ a:hover{
 .map{
 	/* border: 1px solid blue; */
 	height: 30vh;
-	background-color: #9DC4F6;
+	/*background-color: #9DC4F6;*/
+	background-color: #E4EEFB;
 	border-radius: 5px;
 	padding: 40px;
 	margin-top: 2vh;
@@ -218,11 +245,13 @@ a:hover{
 	/*padding: 40px;*/
 
 
-	background-color: #1e2833;
+	/*background-color: #1e2833;*/
+	background-color: white;
 	padding: 40px;
 	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
-	color: white;
+	/*color: white;*/
+	color: black;
 	/*position: relative;*/
 }
 
@@ -250,7 +279,8 @@ a:hover{
 
 #eventName{
 	font-size: 5vh;
-	color: #2980ef;
+	/*color: #2980ef;*/
+	color: #9FBCE1;
 	text-align: center;
 }
 
@@ -258,11 +288,14 @@ a:hover{
 .form-group{
 	text-align: left;
 	/*max-width: 375px;*/
-	background-color: #1e2833;
+	/*background-color: #1e2833;*/
+	/*background-color: #E4EEFB;*/
+	background-color: white;
 	padding: 40px;
 	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
-	color: white;
+	/*color: white;*/
+	color: black;
 }
 
 #invite_btn{
@@ -291,12 +324,15 @@ a:hover{
 }
 
 .attendee_item{
-	background-color: #9DC4F6;
+	/*background-color: #9DC4F6;*/
+	background-color: #E4EEFB;
 	margin-top: 5px;
+	border: 0;
 }
 
 .view_desc{
-	color: #9DC4F6;
+	/*color: #9DC4F6;*/
+	color: black;
 }
 
 .view_container{
@@ -306,7 +342,9 @@ a:hover{
 
 h4{
 	font-size: 5vh;
-	color: #2980ef;
+	/*color: #2980ef;*/
+	/*color: white;*/
+	color: #B7CEEC;
 	margin-top: 2vh;
 }
 

@@ -19,7 +19,7 @@
   <div ng-controller="RegCtrl" ng-init="populate()" id="main">
 
     <div class="left">
-      <div class="map_container">
+      <div class="map_container bg">
         <h4>{{event.name}}</h4>
 
         <div class="view_container">
@@ -38,7 +38,7 @@
 
 
     <div class="r_container">
-      <h4 class="clear">{{event.name}}</h4>
+      <!-- <h4 class="clear">{{event.name}}</h4> -->
       <form ng-submit="selectSeat(name, selected)" class='form-group'>
         <!-- <div class="form-group"> -->
           <label>Name</label>
@@ -52,9 +52,11 @@
           <label>Category 1</label>
           <input type="text" class="form-control">
         </div> -->
-        <select class="form-control btn btn-outline-success" ng-model="selected" ng-options="label for label in event.map.labels">
-          <option class="btn" value="" >Select Seat</option>
+        <!-- <div class="form-control blue_bg"> -->
+        <select class="form-control" ng-model="selected" ng-options="label for label in event.map.labels">
+          <option class="" value="">Select Seat</option>
         </select>
+        <!-- </div> -->
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
       

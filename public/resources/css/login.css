@@ -81,7 +81,8 @@ img {
 #loginForm {
   text-align: left;
   max-width: 375px;
-  background-color: #1e2833;
+  /*background-color: #1e2833;*/
+  background-color: white;
   padding: 40px;
   transform: translate(-50%, -50%);
   position: absolute;
@@ -97,11 +98,30 @@ img {
 
 
 #navbar{
-  background-color: #1e2833;
+  /*background-color: #1e2833;*/
+  background-color: white;
+  color: black;
+
+}
+#navbar a{
+  color: black;
+}
+#navbar a:hover{
+  text-decoration: none;
+  color: #9FBCE1;
+}
+
+.navbar-dark .navbar-brand{
+  color: #87A8D3;
+}
+
+.navbar-dark .navbar-brand:hover{
+  color: #9FBCE1;
 }
 
 body{
-  background-color: #203651;
+  /*background-color: #203651;*/
+  background-color: #CEDFF5;
   height: 100vh;
   min-height: 100vh;
 }
@@ -112,21 +132,24 @@ body{
   padding: 15px 0 20px;
   font-size: 100px;
   color: #2980ef;
+  color: #B7CEEC;
 }
 
 
 .form-control, .form-control:focus{
   background: none;
   border: none;
-  border-bottom: 1px solid #434a52;
+  border-bottom: 1px solid #9FBCE1;
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  color: white;
+  /*color: white;*/
+  color: black;
 }
 
 .btn-primary {
-  background: #0E51A7;
+  /*background: #0E51A7;*/
+  background: #9FBCE1;
   border: none;
   border-radius: 4px;
   padding: 11px;
@@ -137,7 +160,8 @@ body{
 }
 
 .btn-secondary {
-  background: #0A3E81;
+  /*background: #0A3E81;*/
+  background: #87A8D3;
   border: none;
   border-radius: 4px;
   padding: 11px;
@@ -148,13 +172,15 @@ body{
 }
 
 .btn:hover{
-  background-color: #2980ef;
+  /*background-color: #2980ef;*/
+  background-color: #E4EEFB;
+  color: #87A8D3;
   transition: 0.6s;
 }
 
 @-webkit-keyframes autofill {
     0%,100% {
-        color: white;
+        color: black;
         background: transparent;
         font-size: inherit;
     }
@@ -189,7 +215,26 @@ input:-webkit-autofill {
 
 
 .blue{
-  color: #9DC4F6;
+  /*color: #9DC4F6;*/
+}
+
+.bg{
+  background-color: white;
+  padding: 40px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.form-control option{
+  /*background-color: #1e2833;*/
+  background-color: #E4EEFB;
+  /*background-color: rgba(30, 40, 51, 0.8);*/
+  opacity: 0.5;
+  border: 0;
+}
+.form-control select{
+  border: 0;
+  margin-top: 2vh;
 }
 
 @media screen and  (max-width: 768px) {

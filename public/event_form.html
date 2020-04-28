@@ -76,16 +76,16 @@
         <form ng-show="visible" ng-submit="addAttendee()">
           <!-- <label for="attendeeEmail">Email</label> -->
           <input type="email" class="form-control invite_input" id="attendeeEmail" placeholder="Email" ng-model="newEmail" ng-required="required">
-          <button class="btn btn-primary" id="invite_btn" type="submit">Invite</button>
+          <button class="btn btn-secondary" id="invite_btn" type="submit">Invite</button>
         </form>
-        <button class="btn btn-secondary" type="button" ng-click="visible = !visible">Add Attendee</button>
+        <button class="btn btn-primary" type="button" ng-click="visible = !visible">Add Attendee</button>
 
 
         
       </div>
       <div class="submit_container">
-        <button class="btn btn-primary" name="new" type="submit" ng-click="createEvent()" ng-hide="editEvent.event != null">Create Event</button>
-        <button class="btn btn-primary" name="update" type="submit" ng-click="saveEvent()" ng-hide="editEvent.event == null">Save Changes</button>
+        <button class="btn btn-secondary" name="new" type="submit" ng-click="createEvent()" ng-hide="editEvent.event != null">Create Event</button>
+        <button class="btn btn-secondary" name="update" type="submit" ng-click="saveEvent()" ng-hide="editEvent.event == null">Save Changes</button>
       </div>
     <!-- </form> -->
 

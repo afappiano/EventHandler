@@ -158,6 +158,7 @@ var myArea = {
         this.canvas.style.cursor = "none";  // hide the original cursor
         this.context = this.canvas.getContext("2d");
         document.getElementsByClassName("map")[0].append(this.canvas);
+        $('#create_btn').hide();
         this.interval = setInterval(updateArea, 20);
         document.getElementsByTagName("canvas")[0].classList.add("can");
         document.getElementsByTagName("canvas")[0].addEventListener('mousemove', function (e) {

@@ -34,7 +34,8 @@ body{
 	text-align: center;
 	max-width: 325px;
 	/*width: 375px;*/
-	background-color: #1e2833;
+	/*background-color: #1e2833;*/
+	background-color: white;
 	padding: 40px;
 	/*transform: translate(-50%, -50%);
 	position: absolute;
@@ -42,7 +43,7 @@ body{
 	left: 50%;*/
 	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
-	color: white;
+	color: #87A8D3;
 
 	height: 60vh;
 	margin: auto;

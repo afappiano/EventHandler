@@ -18,7 +18,7 @@
   <body>
   <div ng-controller="AttendCtrl" ng-init="populate()" id="main">
 
-    <div class="left">
+    <div class="left bg">
       <div class="map_container">
         <h4>{{event.name}}</h4>
 
@@ -47,7 +47,7 @@
     </div>
 
     <div class="r_container">
-      <h4 class="clear">{{event.name}}</h4>
+      <!-- <h4 class="clear">{{event.name}}</h4> -->
       <!-- <h2>{{event name}}</h2>
       <h2>{{attendee name}}</h2>
       <h2>{{attendee/table num}}</h2>
@@ -56,6 +56,7 @@
 
 
       <!-- <div class="" id="desc_container"> -->
+        <div class="bg">
         <div class="view_container">
           <h2>Description</h2>
           <p class="view_desc" id="eventDesc" ng-model="event.desc" ng-required="required">{{event.name}}</p>
@@ -65,7 +66,7 @@
           <h2>Attendees</h2>
           <ul class="guests list-group">
             <li class="" ng-repeat="attendee in event.attendees">
-              <p class="view_desc">{{attendee.email}} ({{attendee.status}})</div>
+              <p class="view_desc">{{attendee.email}} ({{attendee.status}})</p>
 
 <!--               <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
                 <div class="mb-1 attendeeEmail">{{attendee.email}}</div>
@@ -77,8 +78,10 @@
 
             </li>
           </ul>
+        </div>
+      </div>
           <br><br>
-          <a class="btn btn-primary" ng-click="editRedirect(event)" href="/register">REGISTER</a>
+          <a class="btn btn-secondary" ng-click="editRedirect(event)" href="/register">REGISTER</a>
         </div>
 
       </div>

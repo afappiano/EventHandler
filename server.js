@@ -362,13 +362,40 @@ app.get('/api/events/invited', (req, res) => {
 			// res.send(user);
 			currentuser = user['email'];
 			// console.log("??????" + currentuser);
-			db.collection("events").find({ "attendees" : { $elemMatch: { "email" : currentuser, "status" : "Pending"} } }).sort({"time":-1}).toArray(function(err, result) {
+			db.collection("events").find({ "attendees" : { $elemMatch: { "email" : currentuser/*, "status" : "Pending"*/} } }).sort({"time":-1}).toArray(function(err, result) {
 		        if (err) throw err;
 		        else {
 		          // console.log(result);
 		          res.status(200).send(result);
 		        }
 			});
+		}
+	});
+});
+
+app.post('/api/events/seat', (req, res) => {
+	var currentuser = '';
+	var param = req.body;
+	console.log(param);
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			// console.log("??????" + currentuser);
+			var searchid = {
+				_id: ObjectID(param.event_id)
+			}
+			var changes = {set:{
+				// attendees[index].status = "Accepted"
+				// attendees[index].seat = param.seat
+				// attendees[index].name = param.name
+			}}
+			db.collection("events").updateOne(searchid, changes, function(err, result) {
+				if (err) throw err;
+				  res.status(200).send({message:"Event updated"});
+		  });
 		}
 	});
 });

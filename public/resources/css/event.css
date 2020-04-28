@@ -339,7 +339,7 @@ a:hover{
 	/*color: #9DC4F6;*/
 	color: black;
 	border: 0;
-	width: 500px;
+	min-width: 500px;
 }
 /*.view_desc input{
 }

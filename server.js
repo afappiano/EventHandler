@@ -212,7 +212,7 @@ app.post('/api/events/new', (req, res) => {
   var event = req.body;
   var currentuser = '';
 
-	
+
 	// console.log(currentuser);
 
 	if(event.name == ""){
@@ -262,7 +262,7 @@ app.post('/api/events/new', (req, res) => {
 		    });
 		}
 	});
-  	
+
 
   }
 
@@ -274,7 +274,7 @@ app.post('/api/events/edit', (req, res) => {
 	var event = req.body;
 	var currentuser = '';
 
-	
+
 
 	if(event.name == ""){
 		res.status(400).send({
@@ -324,7 +324,7 @@ app.post('/api/events/edit', (req, res) => {
 				res.status(200).send({message:"Event updated"});
 	    });
 	});
-	
+
   }
 });
 
@@ -349,7 +349,7 @@ app.get('/api/events/hosting', (req, res) => {
 		}
 	});
 
-	
+
 });
 
 // get current user's invites
@@ -384,18 +384,22 @@ app.post('/api/events/seat', (req, res) => {
 			// res.send(user);
 			currentuser = user['email'];
 			// console.log("??????" + currentuser);
-			var searchid = {
-				_id: ObjectID(param.event_id)
-			}
-			var changes = {set:{
-				// attendees[index].status = "Accepted"
-				// attendees[index].seat = param.seat
-				// attendees[index].name = param.name
-			}}
-			db.collection("events").updateOne(searchid, changes, function(err, result) {
-				if (err) throw err;
-				  res.status(200).send({message:"Event updated"});
-		  });
+
+			// Update the status, seat, and name for user "currentuser" in event "searchid"
+			db.collection('events').updateOne(
+				{_id: ObjectID(param.event_id)},
+				{$set:{'attendees.$[element].status': 'Accepted', 'attendees.$[element].seat': param.seat, 'attendees.$[element].name': param.name}},
+				{arrayFilters:[{'element.email':{$eq: currentuser}}]},
+				(err) => {
+					if(err){
+						res.status(500);
+						throw err;
+					}else{
+						res.send({message: "Event updated"});
+					}
+				}
+			);
+
 		}
 	});
 });

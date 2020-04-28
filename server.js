@@ -366,6 +366,14 @@ app.get('/api/events/invited', (req, res) => {
 		        if (err) throw err;
 		        else {
 		          // console.log(result);
+
+			      // Add userStatus to each event which contains the current user's status for that event
+			        for(var event of result){
+			          event['userStatus'] = event['attendees'][event['attendees'].findIndex((e) => {
+				            return e['email'] === currentuser;
+				        })]['status'];
+			      }
+
 		          res.status(200).send(result);
 		        }
 			});

@@ -205,14 +205,19 @@ a:hover{
 
 .map{
 	/* border: 1px solid blue; */
-	height: 30vh;
+	height: 40vh;
 	/*background-color: #9DC4F6;*/
 	background-color: #E4EEFB;
 	border-radius: 5px;
-	padding: 40px;
+	padding: 10px 40px;
 	margin-top: 2vh;
+	text-align: center;
 }
 
+/*#upload_btn {
+	margin-top: 40px;
+}
+*/
 
 .desc{
 	width: 40vw;

@@ -153,8 +153,8 @@ pieces.push(new text("black", 0, 0, "")); // text
 var myArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = $('div.map').width();
-        this.canvas.height = $('div.map').height();
+        this.canvas.width = $('div.map').width() + 50;
+        this.canvas.height = $('div.map').height() + 60;
         this.canvas.style.cursor = "none";  // hide the original cursor
         this.context = this.canvas.getContext("2d");
         document.getElementsByClassName("map")[0].append(this.canvas);

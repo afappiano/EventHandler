@@ -8,6 +8,7 @@ function startBuild() {
     '<br><button onclick="rotate()">Rotate</button>' + 
     '<button onclick="rescale(1)">Scale Up</button>' +
     '<button onclick="rescale(0)">Scale Down</button>' +
+    '<button onclick="undo()">Undo</button>' +
     '<button onclick="wipe()">Wipe</button>' +
     '<br><input width="15" height="10" class="labelText"></input>' +
     '<button onclick="addLabel()">Add Label</button>' +
@@ -32,15 +33,26 @@ function addLabel() {
     var label = $(".labelText").val();
     if (label !== "") {
         labels.push(label);
-        $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "'>" + label + "</option>");
+        $("#labels").append("<option onclick='makeLabel(\"" + label + "\")' value='" + label + "' id='" + label + "'>" + label + "</option>");
+    }
+}
+
+function undo() {
+    var c = components.pop();
+    if (c.type === "Text") {
+        labels.pop();
+        $('#'+c.label).remove();
+
     }
 }
 
 function rectangle(width, height, color, x, y) {
+    this.type = "Rectangle";
     this.width = width;
     this.height = height; 
     this.x = x;
-    this.y = y;    
+    this.y = y;
+    this.color = color;
     this.update = function() {
         ctx = myArea.context;
         ctx.beginPath();
@@ -59,9 +71,11 @@ function rectangle(width, height, color, x, y) {
 }
 
 function circle(radius, color, x, y) {
+    this.type = "Circle";
     this.radius = radius;
     this.x = x;
     this.y = y;
+    this.color = color;
     this.update = function() {
         ctx = myArea.context;
         ctx.beginPath();
@@ -75,10 +89,11 @@ function circle(radius, color, x, y) {
     }
 }
 
-function text(color, x, y) {
+function text(color, x, y, label) {
+    this.type = "Text";
     this.x = x;
     this.y = y;
-    this.label = "";
+    this.label = label;
     this.color = color;
     this.size = scale;
     this.update = function() {
@@ -94,7 +109,6 @@ function text(color, x, y) {
 
 function updateArea() {
     myArea.clear();
-    
     if (myArea.x && myArea.y) {
         pieces[piece].x = myArea.x;
         pieces[piece].y = myArea.y;
@@ -133,7 +147,7 @@ var scale = 20;
 pieces.push(new rectangle(scale, scale, "white", 0, 0));   // square
 pieces.push(new rectangle(scale*2, scale, "white", 0, 0));   // rectangle
 pieces.push(new circle(scale/2, "white", 0, 0));  // circle
-pieces.push(new text("black", 0, 0)); // text
+pieces.push(new text("black", 0, 0, "")); // text
 
 
 var myArea = {
@@ -146,7 +160,7 @@ var myArea = {
         document.getElementsByClassName("map")[0].append(this.canvas);
         this.interval = setInterval(updateArea, 20);
         document.getElementsByTagName("canvas")[0].classList.add("can");
-        document.addEventListener('mousemove', function (e) {
+        document.getElementsByTagName("canvas")[0].addEventListener('mousemove', function (e) {
             myArea.x = Math.ceil(e.pageX/10)*10 - 10 - $(".can").offset().left;
             myArea.y = Math.ceil(e.pageY/10)*10 - 10 - $(".can").offset().top;
         })

@@ -24,10 +24,9 @@
 
         <div class="view_container">
           <h2>Event Map/Floorplan</h2>
-          <a href="#">
             <div class="map">
+                <button class="btn btn-primary" id="create_btn" ng-click="start()">Show Map</button>
             </div>
-          </a>
         </div>
         
       </div>
@@ -66,7 +65,7 @@
           <h2>Attendees</h2>
           <ul class="guests list-group">
             <li class="" ng-repeat="attendee in event.attendees">
-              <p class="view_desc">{{attendee.email}}</div>
+              <p class="view_desc">{{attendee.email}} ({{attendee.status}})</div>
 
 <!--               <div class="d-flex justify-content-between" ng-hide="editing" ng-click="editing = true">
                 <div class="mb-1 attendeeEmail">{{attendee.email}}</div>

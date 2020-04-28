@@ -21,21 +21,15 @@
     <div class="left">
       <div class="desc_container">
         <h2>Register for {{event.name}}</h2>
-        <form>
+        <form ng-submit="selectSeat(name, selected)">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control">
+            <input type="text" ng-model="name" class="form-control">
           </div>
-          <!-- <div class="form-group">
-            <label>About</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Category 1</label>
-            <input type="text" class="form-control">
-          </div> -->
-          <div class="btn">Pick Seat</div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <select class="form-control btn btn-outline-success" ng-model="selected" ng-options="label for label in event.map.labels">
+            <option class="btn" value="" >Select Seat</option>
+          </select>
+          <button type="submit" class="btn btn-primary" >Submit</button>
         </form>
         
       </div>
@@ -44,7 +38,7 @@
     <div class="guests_container">
       <div class="map_container">
         <h2>Event Map/Floorplan</h2>
-        <!-- <button class="btn" id="create_btn" onClick="myArea.start()">Show Map</button> -->
+        <button class="btn" id="create_btn" ng-click="start()">Show Map</button>
         <div class="map">
         </div>
         <a class="btn" ng-click="editRedirect(event)" href="/attending">Back to Form</a>

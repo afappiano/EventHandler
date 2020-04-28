@@ -305,6 +305,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     else return 1;
   },
 
+  $scope.start = function() {
+    myArea.start();
+  },
+
   $scope.populate = function() {
     console.log("POPULATE");
     components = [];
@@ -322,9 +326,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
           components.push(new text(current.color, current.x, current.y, current.label));
         }
       }
-      myArea.start();
       piece = 3;
       console.log(components);
+      myArea.start();
     }
   },
 
@@ -354,6 +358,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     else return 1;
   },
 
+  $scope.start = function() {
+    myArea.start();
+  },
+
   $scope.populate = function() {
     console.log("POPULATE");
     components = [];
@@ -371,9 +379,9 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
           components.push(new text(current.color, current.x, current.y, current.label));
         }
       }
-      myArea.start();
       piece = 3;
       console.log(components);
+      myArea.start();
     }
   },
 
@@ -382,6 +390,29 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngResource'])
     console.log("Redirect...");
     $scope.editEvent.event = event;
     console.log($scope.editEvent.event);
+  },
+
+  $scope.selectSeat = function(name, seat) {
+    var parameters = {
+      name: name,
+      seat: seat,
+      event_id: $scope.event._id
+    }
+    console.log(parameters);
+    $http({
+      method: "POST",
+      header: {
+        'Content-Type': "application/json",
+      },
+      url: '/api/events/seat',
+      data: parameters
+    }).then(function(res) {
+      console.log(res);
+      console.log("Seat saved");
+    },
+    function(res) {
+      console.log('error', res);
+    });
   }
   
   $scope.newEmail = "";

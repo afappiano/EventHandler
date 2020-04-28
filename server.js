@@ -212,7 +212,7 @@ app.post('/api/events/new', (req, res) => {
   var event = req.body;
   var currentuser = '';
 
-	
+
 	// console.log(currentuser);
 
 	if(event.name == ""){
@@ -262,7 +262,7 @@ app.post('/api/events/new', (req, res) => {
 		    });
 		}
 	});
-  	
+
 
   }
 
@@ -274,7 +274,7 @@ app.post('/api/events/edit', (req, res) => {
 	var event = req.body;
 	var currentuser = '';
 
-	
+
 
 	if(event.name == ""){
 		res.status(400).send({
@@ -324,7 +324,7 @@ app.post('/api/events/edit', (req, res) => {
 				res.status(200).send({message:"Event updated"});
 	    });
 	});
-	
+
   }
 });
 
@@ -349,7 +349,7 @@ app.get('/api/events/hosting', (req, res) => {
 		}
 	});
 
-	
+
 });
 
 // get current user's invites
@@ -362,13 +362,52 @@ app.get('/api/events/invited', (req, res) => {
 			// res.send(user);
 			currentuser = user['email'];
 			// console.log("??????" + currentuser);
-			db.collection("events").find({ "attendees" : { $elemMatch: { "email" : currentuser, "status" : "Pending"} } }).sort({"time":-1}).toArray(function(err, result) {
+			db.collection("events").find({ "attendees" : { $elemMatch: { "email" : currentuser/*, "status" : "Pending"*/} } }).sort({"time":-1}).toArray(function(err, result) {
 		        if (err) throw err;
 		        else {
 		          // console.log(result);
+
+			      // Add userStatus to each event which contains the current user's status for that event
+			        for(var event of result){
+			          event['userStatus'] = event['attendees'][event['attendees'].findIndex((e) => {
+				            return e['email'] === currentuser;
+				        })]['status'];
+			      }
+
 		          res.status(200).send(result);
 		        }
 			});
+		}
+	});
+});
+
+app.post('/api/events/seat', (req, res) => {
+	var currentuser = '';
+	var param = req.body;
+	console.log(param);
+
+	req.getCurrentUser((err, user) => {
+		// If the user is not logged in 401 will be returned and user won't be passed to the callback
+		if(user){
+			// res.send(user);
+			currentuser = user['email'];
+			// console.log("??????" + currentuser);
+
+			// Update the status, seat, and name for user "currentuser" in event "searchid"
+			db.collection('events').updateOne(
+				{_id: ObjectID(param.event_id)},
+				{$set:{'attendees.$[element].status': 'Accepted', 'attendees.$[element].seat': param.seat, 'attendees.$[element].name': param.name}},
+				{arrayFilters:[{'element.email':{$eq: currentuser}}]},
+				(err) => {
+					if(err){
+						res.status(500);
+						throw err;
+					}else{
+						res.send({message: "Event updated"});
+					}
+				}
+			);
+
 		}
 	});
 });

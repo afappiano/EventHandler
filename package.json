@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Web Science Project",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "bson": "^0.4.21",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
